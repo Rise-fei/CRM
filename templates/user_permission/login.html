@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Bootstrap 101 Template</title>
+
+    {#	<link href="bootstrap/bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet"/>#}
+    <link href="/static/static_fei/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="col-lg-6 col-lg-offset-3" style="border: solid darkgrey;">
+    <br/>
+
+    <h1 style="color: darkred;">登录客户资源信息管理系统</h1>
+    <form>
+        {% csrf_token %}
+        <div class="form-group">
+            用户名<a href="#">（找回）</a>
+            <input type="text" class="form-control" id="username" name="username">
+        </div>
+        <div class="form-group">
+            密码<a href="#">（重置）</a>
+            <input type="password" class="form-control" id="password" name="password">
+        </div>
+
+         <div class="form-group">
+                <label for="valid_code" class="col-sm-2 control-label">验证码</label>
+                <div class="col-sm-10">
+                    <input type="text" name="valid_code" id="valid_code">
+                    <img id="valid-img" class="valid-img" src="/get_valid_img.png?" alt="">
+                </div>
+            </div>
+        <br/>
+        <button type="button" class="btn btn-danger" id="bth_login">登录</button>
+        <br/>
+        <span class="login-error"></span>
+        <p>
+        <h3>
+            {{ login_error }}
+        </h3>
+        </p>
+        <a href="/register/">&gt;&gt;&gt;立即注册</a>
+        <br/>
+    </form>
+</div>
+<script src="/static/static_fei/bootstrap/jquery-3.3.1.min.js"></script>
+<script src="/static/static_fei/bootstrap/js/bootstrap.min.js"></script>
+<script>
+        $("#bth_login").click(function () {
+        // 1. 取到用户填写的用户名和密码 -> 取input框的值
+        var username = $("#username").val();
+        var password = $("#password").val();
+        var valid_code = $("#valid_code").val();
+        // 2. 用AJAX发送到服务端
+        $.ajax({
+            url: "/login/",
+            type: "post",
+            data: {
+                "username": username,
+                "password": password,
+                "valid_code": valid_code,
+                "csrfmiddlewaretoken": $("[name='csrfmiddlewaretoken']").val()
+            },
+            success: function (data) {
+                console.log(data);
+                if (data.status){
+                    // 有错误，在页面上提示
+                    $(".login-error").text(data.msg);
+                }else {
+                    // 登陆成功
+                    location.href = data.msg;
+                }
+            }
+        })
+    });
+
+    // 当input框获取焦点时将之前的错误清空
+    $("#username,#password").focus(function () {
+        // 将之前的错误清空
+        $(".login-error").text("");
+    });
+
+    // 点击验证码图片 刷新验证码
+    $("#valid-img").click(function () {
+        $(this)[0].src += "?";
+    })
+</script>
+
+
+</body>
+</html>
