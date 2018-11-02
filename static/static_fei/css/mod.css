@@ -1,0 +1,30 @@
+.navbar-fixed-top{
+    height: 60px;
+    background-color: #1b2637;
+    border: 0;
+}
+
+.navbar-nav li{
+    margin-left: 40px;
+}
+.navbar-nav li{
+    font-size: 20px;
+}
+
+.list-group-item{
+    width: 250px;
+    height: 60px;
+    line-height: 54px;
+    text-align: center;
+    background-color: #1b2637;
+    border-top: 0;
+    border-left: 0;
+    border-bottom: 2px solid purple;
+}
+
+.font_big{
+    font-size: 23px;
+}
+.list-group-item a{
+    color: white;
+}

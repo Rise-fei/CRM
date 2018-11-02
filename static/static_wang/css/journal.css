@@ -1,0 +1,34 @@
+.journal_header {
+    margin-top: 100px;
+    margin-bottom: 40px;
+}
+
+.right_btn input {
+    margin-left: 410px;
+    margin-right: 10px;
+}
+
+.right_btn select {
+    width: 120px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+.journal_list {
+    border-top: 1px solid red;
+    margin-top: 10px;
+    padding-top: 10px;
+
+}
+
+.journal_list th, tr {
+    text-align: center;
+}
+
+.journal_list tr a {
+    padding-right: 5px;
+}
+
+.journal_list tr a:visited {
+    color: black;
+}

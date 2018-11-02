@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
@@ -27,7 +26,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'userpermission.apps.UserpermissionConfig',
+    'journaltaks.apps.JournaltaksConfig',
 ]
 
 MIDDLEWARE = [
@@ -71,19 +70,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'CRM.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', #数据的类型 MySQL oracle
-        'HOST':'localhost', #数据库的地址
-        'PORT':3306,
-        'NAME':'crm',
-        'USER':'root',
-        'PASSWORD':''
+        'ENGINE': 'django.db.backends.mysql',  # 数据的类型 MySQL oracle
+        'HOST': 'localhost',  # 数据库的地址
+        'PORT': 3306,
+        'NAME': 'crm',
+        'USER': 'root',
+        'PASSWORD': ''
     }
 }
 
@@ -105,11 +103,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL='userpermission.UserInfo'
+AUTH_USER_MODEL = 'userpermission.UserInfo'
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
 
 TIME_ZONE = 'UTC'
 
@@ -119,18 +118,16 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS=[
+STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-AUTH_USER_MODEL='userpermission.UserInfo'
+AUTH_USER_MODEL = 'userpermission.UserInfo'
 
-
-MEDIA_ROOT=os.path.join(BASE_DIR,'media')
-MEDIA_URL='/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
