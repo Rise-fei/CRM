@@ -1,17 +1,7 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>Bootstrap 101 Template</title>
+{% extends 'index.html' %}
 
-    {#	<link href="bootstrap/bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet"/>#}
-    <link href="/static/static_fei/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-<div class="col-lg-6 col-lg-offset-3" style="border: solid darkgrey;">
+{% block public %}
+    <div class="col-lg-6 col-lg-offset-3">
     <br/>
 
     <h1 style="color: darkred;">登录客户资源信息管理系统</h1>
@@ -46,9 +36,7 @@
         <br/>
     </form>
 </div>
-<script src="/static/static_fei/bootstrap/jquery-3.3.1.min.js"></script>
-<script src="/static/static_fei/bootstrap/js/bootstrap.min.js"></script>
-<script>
+    <script>
         $("#bth_login").click(function () {
         // 1. 取到用户填写的用户名和密码 -> 取input框的值
         var username = $("#username").val();
@@ -88,7 +76,8 @@
         $(this)[0].src += "?";
     })
 </script>
+{% endblock %}
 
 
-</body>
-</html>
+
+

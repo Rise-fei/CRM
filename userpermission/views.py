@@ -3,7 +3,7 @@ from django.contrib import auth
 from userpermission import  models
 from django.http import  JsonResponse
 from django.db.models import Count
-
+from django.contrib.auth.decorators import login_required
 def getValidImg(request):
     # with open("valid_code.png", "rb") as f:
     #     data = f.read()
@@ -77,6 +77,112 @@ def getValidImg(request):
     # 从io对象里面取上一步保存的数据
     data = io_obj.getvalue()
     return HttpResponse(data)
+
+
+
+def change_pw(request,id):
+    user_obj=models.UserInfo.objects.get(nid=id)
+    if request.method=='POST':
+        new_pw1=request.POST.get("new_pw1")
+        new_pw2=request.POST.get("new_pw2")
+        if new_pw1 == new_pw2:
+            user_obj.set_password(new_pw1)
+            user_obj.save()
+            return redirect('/index/')
+        else:
+            return HttpResponse("新密码两次不一致")
+    return render(request,'user_permission/change_pw.html',{"user":user_obj})
+
+def edit_user(request,id):
+    user_obj = models.UserInfo.objects.get(nid=id)
+    if request.method=='POST':
+        user_obj.username=request.POST.get('username')
+        user_obj.set_password(request.POST.get('password'))
+        employee_name=request.POST.get('employee_name')
+        try:
+             em_id=models.Employee.objects.get(employee_name=employee_name).id
+             user_obj.employee_id = em_id
+             user_obj.save()
+        except:
+            return HttpResponse('员工不存在，请查询后修改')
+        return  redirect('/index/')
+
+    return render(request,'user_permission/edit_user.html',{"user":user_obj})
+
+
+def delete_user(request,id):
+    user_obj=models.UserInfo.objects.get(nid=id)
+    user_obj.delete()
+
+    return redirect('/userpermission/user_manage')
+
+
+
+def cat_user(request,id):
+    user_obj=models.UserInfo.objects.get(nid=id)
+    return render(request, 'user_permission/cat_user.html',{"user":user_obj})
+
+
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect('/index/')
+
+@login_required
+def accredit(request):
+    role_list=models.Role.objects.all()
+
+    if request.method=='POST':
+        username=request.POST.get("username")
+        role=request.POST.get("role")
+        accedit_status=request.POST.get("accedit_status")
+
+        role_obj=models.Role.objects.get(role_name=role)
+        user_obj=models.UserInfo.objects.get(username=username)
+
+        if accedit_status == '1':#状态为1   授权为  启动状态
+            user_obj.status=1
+        user_obj.role=role_obj
+        user_obj.save()
+        return redirect('/index/')
+
+    return render(request,'user_permission/accredit.html',{"role_list":role_list,})
+
+@login_required
+def user_manage(request):
+
+    user_list=models.UserInfo.objects.all()
+
+    return render(request,'user_permission/user_manage.html',{"user_list":user_list})
+
+def select(request):
+    if request.method=='POST':
+        username=request.POST.get("username")
+        employee_name = request.POST.get("employee_name")
+        try:
+            user_employee_id=models.UserInfo.objects.get(username=username).employee_id
+            em_objs=models.Employee.objects.filter(employee_name=employee_name)#防止重名
+        except:
+            ret = {"status": False}
+            return JsonResponse(ret)
+        for i in em_objs:
+            if i.id == user_employee_id:  #说明用户名和员工姓名对应一个人
+                department_name=models.Department.objects.get(id=i.department_id).department_name
+                job_name=models.Job.objects.get(id=i.job_id).job_name
+                # print(department_name)
+                # print(job_name)
+                ret={"department_name":department_name,
+                     "job_name":job_name,
+                     "status":True}
+                return JsonResponse(ret)
+        ret={"status":False}
+    return JsonResponse(ret)
+
+
+def index(request):
+    user=request.user.username
+    return render(request,'index.html',{"user":user})
 
 def login(request):
     if request.method == 'POST':

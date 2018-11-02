@@ -17,11 +17,9 @@ class UserInfo(AbstractUser):
     """
     nid = models.AutoField(primary_key=True)
     create_time=models.DateTimeField(auto_now_add=True)
-    role = models.ManyToManyField(to="Role")
     employee=models.ForeignKey(to="Employee")
-    # department_name =models.CharField(max_length=30)
-    # job_name= models.CharField(max_length=30)
-    # job_category=models.CharField(max_length=30)
+    status=models.BooleanField(default=False)
+    role = models.ForeignKey(to="Role",null=True)
 class Employee(models.Model):
     '''
     员工表     employee
@@ -35,7 +33,6 @@ class Employee(models.Model):
     员工-职位    一个员工对应一个职位
     '''
     id=models.AutoField(primary_key=True)
-    employee_id=models.IntegerField()
     employee_name=models.CharField(max_length=30)
     phone = models.CharField(max_length=11)
     create_time = models.DateTimeField(auto_now_add=True)
@@ -64,7 +61,7 @@ class Role(models.Model):
     role_name=models.CharField(max_length=30)
     permission = models.ManyToManyField(to="Permission")
 
+
 class Permission(models.Model):
     nid = models.AutoField(primary_key=True)
     permission_name=models.CharField(max_length=30)
-    status=models.BooleanField()

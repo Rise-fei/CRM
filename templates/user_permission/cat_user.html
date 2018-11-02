@@ -1,0 +1,27 @@
+{% extends "index.html" %}
+{% block public %}  <!-- 扩展base中的block content部分 -->
+
+     <div class="container">
+        <h1 class="text-center">用户详情资料信息</h1>
+        <br><br><br>
+        <p>管理用户基本信息</p>
+        <hr>
+        <table>
+            <tr>
+                <td>用户名：{{ user.username }}</td>
+                <td>员工姓名：{{ user.employee.employee_name }}</td>
+            </tr>
+            <tr>
+                <td>职位名称：{{ user.employee.job.job_name }}</td>
+                <td>管理员分类：{{ user.role.role_name }}</td>
+            </tr>
+            <tr>
+                <td>部门名称：{{ user.employee.department.department_name }}</td>
+                <td>授权状态：{{ user.status }}</td>
+            </tr>
+        </table>
+
+     </div>
+
+
+{% endblock %}
