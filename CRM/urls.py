@@ -24,9 +24,11 @@ from journaltaks import urls as journal_url
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    # url(r'^index/', view.login),    #主页未写
+    url(r'^index/', view.index),    #主页未写
     url(r'^login/', view.login),
     url(r'^register/', view.register),
+    url(r'^logout/', view.logout),
+    url(r'^change_pw/(\d+)', view.change_pw),
     url(r'^get_valid_img.png/', view.getValidImg),
     url(r'^userpermission/', include(url_fei)),
     url(r'^wang/', include(journal_url)),
