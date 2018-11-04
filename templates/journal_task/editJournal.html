@@ -1,0 +1,78 @@
+{% extends 'journal_task/mod.html' %}
+
+{% block public %}
+    <div class="edit_header col-sm-offset-5">
+        <h2>编辑日志信息</h2>
+    </div>
+    <div class="class1">
+        <h4>日志基本信息</h4>
+    </div>
+    <form class="body_header form-horizontal" action="editJournal.html" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <p class="col-sm-2 control-label">机构名称：</p>
+            <div class="col-sm-5" style="white-space:nowrap;">
+                <input type="text" class="form-control" id="name" name="name" value="{{ journal_list.organ.name }}">
+            </div>
+            <button type="button" class="btn btn-primary col-sm-1">查询</button>
+        </div>
+        <div class="form-group">
+            <p class="col-sm-2 control-label">机构类型：</p>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="organ_type" name="organ_type" value="{{ journal_list.organ.organ_type }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="col-sm-2 control-label">机构级别：</p>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="grade" name="grade" value="{{ journal_list.organ.grade }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="col-sm-2 control-label">机构地址：</p>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="address" name="address" value="{{ journal_list.organ.address }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="col-sm-2 control-label">联系人：</p>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="content_name" name="content_name" value="{{ journal_list.organ.contact.content_name }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="col-sm-2 control-label">电话：</p>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="phone" name="phone" value="{{ journal_list.organ.contact.phone }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="col-sm-2 control-label">日志所属人：</p>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="personal" name="personal" value="{{ journal_list.personal }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="col-sm-2 control-label">日志等级：</p>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="jou_level" name="jou_level" value="{{ journal_list.jou_level }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="col-sm-2 control-label">日志内容：</p>
+            <div class="col-sm-5">
+                <textarea class="form-control" id="content" name="content"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="col-sm-2 control-label">日志日期：</p>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="create_time" name="create_time" value="{{ journal_list.create_time }}">
+            </div>
+        </div>
+        <div class="btn_bottom col-sm-6 col-md-offset-4">
+            <button type="submit" class="btn btn-primary col-sm-2">确定编辑</button>
+            <a href="/wang/journal/"><button type="button" class="btn btn-primary col-sm-2">取消</button></a>
+        </div>
+    </form>
+{% endblock %}
