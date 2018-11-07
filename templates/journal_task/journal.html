@@ -1,0 +1,56 @@
+{% extends 'journal_task/mod.html' %}
+
+{% block public %}
+    <div class="journal_header col-sm-offset-5">
+        <h2>日志信息列表</h2>
+    </div>
+    <div class="new_btn">
+        <div class="left_btn col-sm-4">
+            <button type="button" class="btn btn-primary">新增日志</button>
+        </div>
+        <div class="right_btn">
+            <input type="text" placeholder="请输入关键字">
+            <select class="select_text">
+                <option>全部</option>
+                <option value="1">全部</option>
+                <option value="2">全部</option>
+                <option value="3">全部</option>
+            </select>
+            <button type="button" class="btn btn-primary">查询</button>
+        </div>
+    </div>
+    <div class="journal_list">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                <th>编号</th>
+                <th>机构名称</th>
+                <th>机构类型</th>
+                <th>日志所属人</th>
+                <th>联系人</th>
+                <th>日志日期</th>
+                <th>日志等级</th>
+                <th>操作</th>
+                </thead>
+                <tbody>
+                {% for journal in journal_list %}
+                    <tr>
+                        <td>{{ journal.number }}</td>
+                        <td>{{ journal.organ.name }}</td>
+                        <td>{{ journal.organ.organ_type }}</td>
+                        <td>{{ journal.Personal }}</td>
+                        <td>{{ journal.organ.contact.name }}</td>
+                        <td>{{ journal.create_time }}</td>
+                        <td>{{ journal.jou_level }}</td>
+                        <td>
+                            <a href="/wang/edit/{{ journal.nid }}/">编辑</a>
+                            <a href="#">删除</a>
+                            <a href="#">查看</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
