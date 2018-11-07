@@ -1,0 +1,23 @@
+{% extends "index.html" %}
+{% block public %}  <!-- 扩展base中的block content部分 -->
+
+    <div class="container">
+        <h1 class="text-center">员工详情资料信息</h1>
+        <br><br><br>
+
+        <div class="text-center">
+            <h2>员工基本信息</h2>
+            <hr>
+
+            <h4>员工姓名：{{ employee.employee_name }}</h4><br><br><br>
+            <h4>联系方式：{{ employee.phone}}</h4><br><br><br>
+
+
+            <h4>职位名称：{{ employee.job.job_name }}</h4><br><br><br>
+
+            <h4>部门名称：{{ employee.department.department_name }}</h4><br><br><br>
+        </div>
+    </div>
+
+
+{% endblock %}

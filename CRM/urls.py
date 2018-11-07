@@ -22,11 +22,13 @@ from userpermission import urls as url_fei
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^index/', view.index),    #主页未写
+    url(r'^index/', view.index),
     url(r'^login/', view.login),
     url(r'^register/', view.register),
     url(r'^logout/', view.logout),
-    url(r'^change_pw/(\d+)', view.change_pw),
+
+
+    url(r'^change_pw/(\d+)/', view.change_pw),
     url(r'^get_valid_img.png/', view.getValidImg),
 
 

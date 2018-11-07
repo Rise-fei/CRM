@@ -48,7 +48,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'userpermission.service.rbac.ValidPermission',
 ]
+# from userpermission.service.rbac import  ValidPermission
 
 ROOT_URLCONF = 'CRM.urls'
 
