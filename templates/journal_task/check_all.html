@@ -11,8 +11,7 @@
             </a>
             <button type="button" class="btn btn-primary new_add_btn" id="many_del">删除</button>
         </div>
-        <form action="/wang/check_all/" method="post">
-            {% csrf_token %}
+        <form action="" method="post">
             <div class="right_btn">
                 <input type="text" placeholder="请输入关键字" name="search_key" id="search_key">
                 <select type="text" class="select_text" id="select_text" name="select_text">
@@ -22,7 +21,7 @@
                     <option value="4">联系人</option>
                     <option value="5">日志等级</option>
                 </select>
-                <button type="submit" class="btn btn-primary btn_inquiry">查询</button>
+                <button type="button" class="btn btn-primary btn_inquiry">查询</button>
             </div>
         </form>
     </div>
@@ -44,7 +43,7 @@
                 <tbody>
                 {% for journal in journal_list %}
                     <tr>
-                        <td><input type="checkbox" value="{{ journal.number }}" id="onclick_checkbox"
+                        <td><input type="checkbox" value="{{ journal }}" id="onclick_checkbox"
                                    name="onclick_checkbox"></td>
                         <td>{{ journal.number }}</td>
                         <td><a href="/wang/checkJournal/id={{ journal.number }}/">{{ journal.organ.name }}</a></td>
@@ -63,9 +62,6 @@
                 </tbody>
             </table>
         </div>
-    </div>
-    <div class="mod_page col-sm-6 col-sm-offset-5">
-        {% include 'journal_task/checkdata_page.html' %}
     </div>
     {% csrf_token %}
     <script src="/static/static_wang/js/js1.js"></script>
