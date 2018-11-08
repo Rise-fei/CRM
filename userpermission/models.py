@@ -17,9 +17,9 @@ class UserInfo(AbstractUser):
     """
     nid = models.AutoField(primary_key=True)
     create_time=models.DateTimeField(auto_now_add=True)
-    employee=models.ForeignKey(to="Employee")
+    employee=models.OneToOneField(to="Employee")
     status=models.BooleanField(default=False)
-    role = models.ForeignKey(to="Role",null=True)
+    role = models.ManyToManyField(to="Role",null=True)
 class Employee(models.Model):
     '''
     员工表     employee
@@ -29,8 +29,8 @@ class Employee(models.Model):
     手机号码
     创建日期
     状态
-    员工-部门    一个员工属于一个部门
-    员工-职位    一个员工对应一个职位
+    员工-部门    一个员工属于一个部门  外键
+    员工-职位    一个员工对应一个职位  外键
     '''
     id=models.AutoField(primary_key=True)
     employee_name=models.CharField(max_length=30)
@@ -65,3 +65,12 @@ class Role(models.Model):
 class Permission(models.Model):
     nid = models.AutoField(primary_key=True)
     permission_name=models.CharField(max_length=30)
+    url=models.CharField(max_length=200)
+    action=models.CharField(max_length=30,default="")
+    group=models.ForeignKey(to="PermissionGroup",default=1)
+
+
+class PermissionGroup(models.Model):
+    title=models.CharField(max_length=30)
+    def __str__(self):
+        return self.title
