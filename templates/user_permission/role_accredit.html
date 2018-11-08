@@ -1,0 +1,39 @@
+{% extends "index.html" %}
+{% block public %}  <!-- 扩展base中的block content部分 -->
+
+    <div class="container" >
+        <h1 class="text-center">角色权限信息</h1>
+
+        {% for role in role_list %}
+            <h2>角色{{ forloop.counter }}:{{ role.role_name }}</h2>
+            <h3>(对应的权限如下)</h3>
+            <h4><div class="row">
+            {% for i in role.permission.all %}
+
+                     <div class="col-md-2">
+                     <button type="button" class="btn btn-info">{{ i.permission_name }}</button>
+                     </div>
+
+
+            {% endfor %}</div>
+            </h4>
+            <form action="/userpermission/role_accredit/?role_id={{ role.pk }}" method="post">
+            {% csrf_token %}
+            <button type="button" class="btn btn-success btn-block">修改角色权限</button>
+             <select  name="select_role_accredit" class="form-control" multiple>
+                            {% for permission in permission_list%}
+                                <option value="{{ permission.pk }}">
+                                    权限名称：{{ permission.permission_name }}&nbsp;&nbsp;
+                                </option>
+                            {% endfor %}
+                         </select>
+              <button type="submit" id="save" class="btn btn-primary btn-lg center-block">确定保存</button>
+            </form>
+            <br><br><br>
+        {% endfor %}
+
+    </div>
+
+
+
+{% endblock %}

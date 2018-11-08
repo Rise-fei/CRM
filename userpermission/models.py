@@ -74,3 +74,16 @@ class PermissionGroup(models.Model):
     title=models.CharField(max_length=30)
     def __str__(self):
         return self.title
+
+
+class Essay_category(models.Model):
+    category = models.CharField(max_length=30)
+class File(models.Model):
+    type=models.CharField(max_length=30)
+class Essay(models.Model):
+    essay_title=models.CharField(max_length=200)
+    category=models.ForeignKey(to="Essay_category")
+    file=models.ForeignKey(to="File")
+    comment=models.TextField(max_length=300)
+    author=models.CharField(max_length=30)
+    file_file = models.FileField(default=None)

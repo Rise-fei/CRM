@@ -1,0 +1,49 @@
+{% extends "index.html" %}
+{% block public %}  <!-- 扩展base中的block content部分 -->
+
+    <div>
+        <h1 class="text-center">员工添加</h1>
+        <form action="/userpermission/add_employee/" method="post">
+        {% csrf_token %}
+            <div class="form-group">
+                <label class="col-sm-2 control-label">员工姓名</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="employee_name" name="employee_name">
+                </div>
+            </div>
+             <div class="form-group">
+                <label class="col-sm-2 control-label">联系方式</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="phone" name="phone">
+                </div>
+            </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">选择部门</label>
+                <div class="col-sm-10">
+                    <select name="department" class="form-control">
+                        {% for department in department_list %}
+                             <option value="{{ department.pk }}">{{ department.department_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">职位名称</label>
+            <div class="col-sm-10">
+                 <select name="job" class="form-control">
+                    {% for job in job_list %}
+                         <option value="{{ job.pk }}">{{ job.job_name}}</option>
+                     {% endfor %}
+                </select>
+            </div>
+        </div>
+        <br><br><br><br><br>
+        <button type="submit" class="btn btn-primary btn-lg center-block">保存</button>
+        </form>
+
+
+
+
+
+    </div>
+{% endblock %}

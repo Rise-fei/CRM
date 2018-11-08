@@ -23,7 +23,7 @@
                      <div class="form-group">
                         <label class="col-sm-2 control-label">选择身份</label>
                         <div class="col-sm-10">
-                        <select  name="select_employee">
+                        <select  name="select_employee" class="form-control">
                             {% for employee in employee_list %}
                                 <option value="{{ employee.id }}">
                                     员工姓名：{{ employee.employee_name }}&nbsp;&nbsp;

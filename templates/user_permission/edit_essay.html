@@ -1,0 +1,73 @@
+{% extends "index.html" %}
+{% block public %}
+
+    <!-- 扩展base中的block content部分 -->
+
+     <div class="container">
+        <h1 class="text-center">编辑资料信息</h1>
+        <br><br><br><br>
+        <p class="text-center">资料基本信息</p>
+        <hr>
+        <form action="/userpermission/edit_essay/{{ essay_obj.id }}/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label class="col-sm-2 control-label">资料名称</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="{{ essay_obj.essay_title }}" id="essay_name" name="essay_name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">资料分类</label>
+                <div class="col-sm-10">
+                    <select name="category" class="form-control">
+                        {% for category in category_list %}
+                            {% if essay_obj.category_id == category.id %}
+                            <option selected value="{{ category.pk }}">{{ category.category }}</option>
+                            {% else %}
+                              <option value="{{ category.pk }}">{{ category.category }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">文件分类</label>
+                <div class="col-sm-10">
+                    <select name="file" class="form-control">
+                        {% for file in file_list %}
+
+                              {% if essay_obj.file_id == file.id %}
+                              <option selected value="{{ file.pk }}">{{ file.type }}</option>
+                            {% else %}
+                              <option value="{{ file.pk }}">{{ file.type }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        <div class="form-group">
+                <label class="col-sm-2 control-label">发布者</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="{{ essay_obj.author }}" id="author" name="author">
+                </div>
+            </div>
+          <div class="form-group">
+                <label class="col-sm-2 control-label">备注</label>
+                <div class="col-sm-10">
+                    <textarea style="width: 100%;" name="comment"  rows="5"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">上传文件</label>
+                <div class="col-sm-10">
+                    <input type="file" name="file_file">
+                </div>
+            </div>
+
+
+            <br><br><br><br><br>
+            <button type="submit" class="btn btn-primary btn-lg center-block">保存</button>
+        </form>
+
+    </div>
+{% endblock %}

@@ -6,8 +6,7 @@
         <br>
         <br>
         <br>
-
-
+        <a class="btn btn-warning btn-lg" href="/userpermission/add_employee/">新增员工</a>
         <table class="table table-striped">
             <thead>
             <th>编号</th>
@@ -30,7 +29,7 @@
                             yes{% else %}no
                         {% endif %}</td>
                         <td>{{ employee.department.department_name }}</td>
-                        <td>{{ employee.department.department_name }}</td>
+                        <td>{{ employee.job.job_name}}</td>
                         <td>
                             <a href="/userpermission/edit_employee/{{ employee.id }}/">
                                 <button class="btn btn-info">编辑</button>
