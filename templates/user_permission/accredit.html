@@ -1,37 +1,55 @@
 {% extends "index.html" %}
 {% block public %}  <!-- 扩展base中的block content部分 -->
 
-    <div class="container">
+    <div class="container" >
         <h1 class="text-center">用户授权信息</h1>
 
 
-        <form action="/userpermission/accredit/" class="form-horizontal" method="post">
+        <form action="/userpermission/accredit/" class="form-horizontal col-md-offset-3" method="post">
          <p><strong>用户授权基本信息</strong></p>
         <hr>
             {% csrf_token %}
             <div class="form-group">
                 <label for="input1" class="col-sm-2 control-label">用户名：</label>
                 <div class="col-sm-10">
-                    <input type="text" name="username" id="input1">
+                    <input type="text" name="username" id="input1" style="width: 50%">
                 </div>
             </div>
             <div class="form-group">
                 <label for="input2" class="col-sm-2 control-label">员工姓名：</label>
                 <div class="col-sm-8">
-                    <input type="text" name="employee_name" id="input2">
-                    <button type="button" class="btn btn-default btn-sm" id="select">查询</button>
+                    <input type="text" name="employee_name" id="input2" style="width: 50%">
+                    <button type="button" class="btn btn-info" id="select">查询</button>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">管理员分类：</label>
-                <div class="col-sm-10">
-                    <select name="role">
-                        {% for role in role_list %}
-                            <option>{{ role.role_name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-            </div>
+                        <label class="col-sm-2 control-label">选择角色</label>
+                        <div class="col-sm-10">
+                        <select  name="select_role" multiple>
+                            {% for role in role_list %}
+                                <option value="{{ role.nid }}">
+                                    角色名称：{{ role.role_name }}&nbsp;&nbsp;
+                                </option>
+                            {% endfor %}
+                         </select>
+                        </div>
+                    </div>
+{#            <div class="form-group">#}
+{#                <label class="col-sm-2 control-label">管理员分类：</label>#}
+{#                <div class="col-sm-10">#}
+{#                    <select name="role">#}
+{#                        {% for role in role_list %}#}
+{#                            <option>{{ role.role_name }}</option>#}
+{#                        {% endfor %}#}
+{#                    </select>#}
+{#                </div>#}
+{#            </div>#}
+{#             <div class="form-group">#}
+{#                <label class="col-sm-2 control-label">角色名称：</label>#}
+{#                <div class="col-sm-10">#}
+{#                    <span id="role"></span>#}
+{#                </div>#}
+{#            </div>#}
             <div class="form-group">
                 <label class="col-sm-2 control-label">部门名称：</label>
                 <div class="col-sm-10">
@@ -44,15 +62,15 @@
                     <span id="job"></span>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">授权状态：</label>
-                <div class="col-sm-10">
-                    <select name="accedit_status">
-                            <option value="1">启用</option>
-                            <option value="0">禁用</option>
-                    </select>
-                </div>
-            </div>
+{#            <div class="form-group">#}
+{#                <label class="col-sm-2 control-label">授权状态：</label>#}
+{#                <div class="col-sm-10">#}
+{#                    <select name="accedit_status">#}
+{#                            <option value="1">启用</option>#}
+{#                            <option value="0">禁用</option>#}
+{#                    </select>#}
+{#                </div>#}
+{#            </div>#}
 
                 <button type="submit" id="save" class="btn btn-primary btn-lg center-block">确定保存</button>
         </form>
@@ -62,8 +80,8 @@
     <script type="text/javascript">
         $(function () {
             $("#select").click(function () {
-                var username=$("#input1").val()
-                var employee_name=$("#input2").val()
+                var username=$("#input1").val();
+                var employee_name=$("#input2").val();
                 {#alert(username)#}
                 {#alert(employee_name)#}
                 $.ajax({
@@ -78,6 +96,7 @@
                         if (data.status){//说明成功查询
                             $("#department").text(data.department_name);
                             $("#job").text(data.job_name);
+                            {#$("#role").text(data.role);#}
                         }
                         else{
                             alert("请输入正确的用户名和员工姓名")
