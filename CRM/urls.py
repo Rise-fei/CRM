@@ -19,6 +19,7 @@ from userpermission import  views as view
 from django.views.static import serve#需要导入
 from django.conf import settings
 from userpermission import urls as url_fei
+from msg import urls as msg_url
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -30,4 +31,5 @@ urlpatterns = [
 
 
     url(r'^userpermission/', include(url_fei)),
+    url(r'^msg/', include(msg_url)),
 ]
