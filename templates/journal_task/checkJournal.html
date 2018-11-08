@@ -1,0 +1,58 @@
+{% extends 'journal_task/mod.html' %}
+
+{% block public %}
+    <div class="edit_header col-sm-offset-5">
+        <h2>日志信息详情</h2>
+    </div>
+    <div class="class1">
+        <h4>日志详细信息</h4>
+    </div>
+    <form class="body_header form-horizontal" action="checkJournal.html" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <span class="col-sm-2 control-label">机构名称：</span>
+            <span class="check_date">{{ check_list.organ.name }}</span>
+        </div>
+        <div class="form-group">
+            <span class="col-sm-2 control-label">机构类型：</span>
+            <span class="check_date">{{ check_list.organ.organ_type }}</span>
+        </div>
+        <div class="form-group">
+            <span class="col-sm-2 control-label">机构级别：</span>
+            <span class="check_date">{{ check_list.organ.grade }}</span>
+        </div>
+        <div class="form-group">
+            <span class="col-sm-2 control-label">机构地址：</span>
+            <span class="check_date">{{ check_list.organ.address }}</span>
+        </div>
+        <div class="form-group">
+            <span class="col-sm-2 control-label">联系人：</span>
+            <span class="check_date">{{ check_list.organ.contact.content_name }}</span>
+        </div>
+        <div class="form-group">
+            <span class="col-sm-2 control-label">电话：</span>
+            <span class="check_date">{{ check_list.organ.contact.phone }}</span>
+        </div>
+        <div class="form-group">
+            <span class="col-sm-2 control-label">日志所属人：</span>
+            <span class="check_date">{{ check_list.personal }}</span>
+        </div>
+        <div class="form-group">
+            <span class="col-sm-2 control-label">日志等级：</span>
+            <span class="check_date">{{ check_list.jou_level }}</span>
+        </div>
+        <div class="form-group">
+            <span class="col-sm-2 control-label">日志内容：</span>
+            <span class="check_date">{{ check_list.content }}</span>
+        </div>
+        <div class="form-group">
+            <span class="col-sm-2 control-label">日志日期：</span>
+            <span class="check_date">{{ check_list.create_time }}</span>
+        </div>
+        <div class="btn_bottom col-sm-6 col-md-offset-4">
+            <a href="/wang/journal/">
+                <button type="button" class="btn btn-primary col-sm-2">关闭</button>
+            </a>
+        </div>
+    </form>
+{% endblock %}

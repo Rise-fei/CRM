@@ -2,11 +2,11 @@
 
 {% block public %}
     <div class="journal_header col-sm-offset-5">
-        <h2>日志信息列表</h2>
+        <h2>售后日志信息列表</h2>
     </div>
     <div class="new_btn">
         <div class="left_btn col-sm-4">
-            <a href="/wang/newJournal/"><button type="button" class="btn btn-primary new_add_btn">新增日志</button></a>
+            <a href="/wang/newAfterSale/"><button type="button" class="btn btn-primary new_add_btn">新增售后日志</button></a>
         </div>
         <div class="right_btn">
             <input type="text" placeholder="请输入关键字">
@@ -24,28 +24,27 @@
             <table class="table table-bordered">
                 <thead>
                 <th>编号</th>
+                <th>售后标题</th>
                 <th>机构名称</th>
-                <th>机构类型</th>
-                <th>日志所属人</th>
+                <th>售后类型</th>
                 <th>联系人</th>
-                <th>日志日期</th>
-                <th>日志等级</th>
-                <th>操作</th>
+                <th>发布时间</th>
+                <th>处理状态</th>
                 </thead>
-                <tbody>
-                {% for journal in journal_list %}
+                 <tbody>
+                {% for after_sale in after_sale_list %}
                     <tr>
-                        <td>{{ journal.number }}</td>
-                        <td>{{ journal.organ.name }}</td>
-                        <td>{{ journal.organ.organ_type }}</td>
-                        <td>{{ journal.personal }}</td>
-                        <td>{{ journal.organ.contact.content_name }}</td>
-                        <td>{{ journal.create_time }}</td>
-                        <td>{{ journal.jou_level }}</td>
+                        <td>{{ after_sale.number }}</td>
+                        <td>{{ after_sale.title }}</td>
+                        <td>{{ after_sale.organ_after_sale.name }}</td>
+                        <td>{{ after_sale.sale_type }}</td>
+                        <td>{{ after_sale.organ_after_sale.contact_name }}</td>
+                        <td>{{ after_sale.create_time }}</td>
+                        <td>{{ after_sale.state }}</td>
                         <td>
-                            <a href="/wang/editJournal/id={{ journal.nid }}/">编辑</a>
-                            <a href="/wang/delJournal/id={{ journal.nid }}/">删除</a>
-                            <a href="/wang/checkJournal/id={{ journal.nid }}/">查看</a>
+                            <a href="/wang/editAfterSale/id={{ after_sale.nid }}/">编辑</a>
+                            <a href="/wang/delAfterSale/id={{ after_sale.nid }}/">删除</a>
+                            <a href="/wang/checkAfterSale/id={{ after_sale.nid }}/">查看</a>
                         </td>
                     </tr>
                 {% endfor %}
