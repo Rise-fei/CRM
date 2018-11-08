@@ -7,12 +7,15 @@
     <title>客户资源管理</title>
     <link href="/static/static_fei/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/static/static_fei/css/cssStyle.css" rel="stylesheet">
+    <link href="/static/static_wang/css/journal.css" rel="stylesheet">
+    <link href="/static/static_wang/css/edit.css" rel="stylesheet">
+    <link href="/static/static_fei/css/mod.css" rel="stylesheet">
     <script src="/static/static_fei/bootstrap/jquery-3.3.1.min.js"></script>
     <script src="/static/static_fei/bootstrap/js/bootstrap.min.js"></script>
     <script src="/static/static_fei/bootstrap/csrfajax.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand " href="#" style="color: blue;font-size: 24px">客户资源信息
@@ -22,8 +25,10 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="nav-submit"><a href="/userpermission/accredit/"><p class="glyphicon glyphicon-grain">&nbsp;权限管理</p></a></li>
-                <li class="nav-submit"><a href="/userpermission/user_manage/"><p class="glyphicon glyphicon-lock">&nbsp;用户管理</p></a></li>
+                <li class="nav-submit"><a href="/userpermission/accredit/"><p class="glyphicon glyphicon-grain">&nbsp;权限管理</p>
+                </a></li>
+                <li class="nav-submit"><a href="/userpermission/user_manage/"><p class="glyphicon glyphicon-lock">&nbsp;用户管理</p>
+                </a></li>
                 <li class="nav-submit"><a href="#"><p class="glyphicon glyphicon-calendar">&nbsp;系统日志</p></a></li>
 
             </ul>
@@ -32,15 +37,16 @@
                 <li class="nav-submit"><a href="#"><p class="glyphicon glyphicon-bell">&nbsp;系统消息</p></a></li>
                 {% if request.user.username %}
                     <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                       aria-haspopup="true" aria-expanded="false"><p class="glyphicon glyphicon-user">{{ request.user.username }}</p><span
-                            class="caret"></span></a>
-                    <ul class="dropdown-menu" style="text-align: center">
-                        <li><a href="#">用户资料</a></li>
-                        <li><a href="/change_pw/{{ request.user.nid }}/">修改密码</a></li>
-                        <li><a href="/logout/">注销</a></li>
-                    </ul>
-                </li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false"><p
+                                class="glyphicon glyphicon-user">{{ request.user.username }}</p><span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu" style="text-align: center">
+                            <li><a href="#">用户资料</a></li>
+                            <li><a href="/change_pw/{{ request.user.nid }}/">修改密码</a></li>
+                            <li><a href="/logout/">注销</a></li>
+                        </ul>
+                    </li>
                 {% else %}
                     <li class="nav-submit"><a href="/login/"><p class="glyphicon ">&nbsp;登录</p></a></li>
                     <li class="nav-submit"><a href="/register/"><p class="glyphicon   ">&nbsp;注册</p></a></li>
@@ -49,47 +55,66 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-<div style="height: 60px">
-</div>
-<div class=".container-fluid">
+<div class=".container-fluid body_body">
     <div class="row">
-        <div class="col-md-2">
-            <ul class="list-group" >
-                <li class="list-group-item font_big"><a href="#"><p class="glyphicon glyphicon-home">&nbsp;首页</p></a>
+        <div class="srf col-md-2">
+            <ul class="list-group">
+                <li class="list-group-item font_big"><a href="/index/"><p class="glyphicon glyphicon-home">
+                    &nbsp;首页</p></a>
                 </li>
-                <li class="list-group-item font_big"><a href="#"><p class="glyphicon glyphicon-grain">&nbsp;机构管理</p></a>
+                <li class="list-group-item font_big"><a href="#" id="nie"><p class="glyphicon glyphicon-grain">&nbsp;机构管理</p></a>
                 </li>
-                <li class="list-group-item"><a href="#"><p class="glyphicon glyphicon-menu-right"> &nbsp;信息管理</p></a>
+                <div class="nie_nie" style="display: none">
+                <li class="list-group-item"><a href="#"><p class="glyphicon glyphicon-menu-right">
+                    &nbsp;信息管理</p></a>
                 </li>
-                <li class="list-group-item"><a href="#"><p class="glyphicon glyphicon-menu-right"> &nbsp;商机管理</p></a>
+                <li class="list-group-item"><a href="#"><p class="glyphicon glyphicon-menu-right">
+                    &nbsp;商机管理</p></a>
                 </li>
-                <li class="list-group-item"><a href="#"><p class="glyphicon glyphicon-menu-right"> &nbsp;产品管理</p></a>
+                <li class="list-group-item"><a href="#"><p class="glyphicon glyphicon-menu-right">
+                    &nbsp;产品管理</p></a>
                 </li>
-                <li class="list-group-item"><a href="#"><p class="glyphicon glyphicon-menu-right"> &nbsp;合同管理</p></a>
+                <li class="list-group-item"><a href="#"><p class="glyphicon glyphicon-menu-right">
+                    &nbsp;合同管理</p></a>
                 </li>
-                <li class="list-group-item"><a href="#"><p class="glyphicon glyphicon-menu-right"> &nbsp;日志管理</p></a>
+                <li class="list-group-item"><a href="/wang/journal/"><p
+                        class="glyphicon glyphicon-menu-right">
+                    &nbsp;日志管理</p></a>
                 </li>
-                <li class="list-group-item"><a href="#"><p class="glyphicon glyphicon-menu-right"> &nbsp;预约管理</p></a>
+                <li class="list-group-item"><a href="/wang/bespeak/"><p
+                        class="glyphicon glyphicon-menu-right">
+                    &nbsp;预约管理</p></a>
                 </li>
-                <li class="list-group-item"><a href="#"><p class="glyphicon glyphicon-menu-right"> &nbsp;售后日志</p></a>
+                <li class="list-group-item"><a href="/wang/afterSale"><p
+                        class="glyphicon glyphicon-menu-right">
+                    &nbsp;售后日志</p></a>
                 </li>
-                <li class="list-group-item"><a href="#"><p class="glyphicon glyphicon-menu-right"> &nbsp;任务清单</p></a>
+                <li class="list-group-item"><a href="#"><p class="glyphicon glyphicon-menu-right">
+                    &nbsp;任务清单</p></a>
                 </li>
-                <li class="list-group-item font_big"><a href="#"><p class="glyphicon glyphicon-user">&nbsp;员工管理</p></a>
+                </div>
+                <li class="list-group-item font_big"><a href="#"><p class="glyphicon glyphicon-user">&nbsp;员工管理</p>
+                </a>
                 </li>
                 <li class="list-group-item font_big"><a href="#"><p class="glyphicon glyphicon-folder-open">
                     &nbsp;资料库管理</p></a></li>
-                <li class="list-group-item font_big"><a href="#"><p class="glyphicon glyphicon-random">&nbsp;系统对接管理</p>
+                <li class="list-group-item font_big"><a href="#"><p class="glyphicon glyphicon-random">
+                    &nbsp;系统对接管理</p>
                 </a></li>
-                <li class="list-group-item font_big"><a href="#"><p class="glyphicon glyphicon-stats">&nbsp;统计分析</p></a>
+                <li class="list-group-item font_big"><a href="#"><p class="glyphicon glyphicon-stats">&nbsp;统计分析</p>
+                </a>
                 </li>
-                <li class="list-group-item font_big"><a href="#"><p class="glyphicon glyphicon-tasks">&nbsp;用户管理</p></a>
+                <li class="list-group-item font_big"><a href="#"><p class="glyphicon glyphicon-tasks">&nbsp;用户管理</p>
+                </a>
                 </li>
-                <li class="list-group-item font_big"><a href="#"><p class="glyphicon glyphicon-cog">&nbsp;系统配置</p></a>
+                <li class="list-group-item font_big"><a href="#"><p class="glyphicon glyphicon-cog">&nbsp;系统配置</p>
+                </a>
                 </li>
-                <li class="list-group-item font_big"><a href="#"><p class="glyphicon glyphicon-edit">&nbsp;系统日志</p></a>
+                <li class="list-group-item font_big"><a href="#"><p class="glyphicon glyphicon-edit">&nbsp;系统日志</p>
+                </a>
                 </li>
-                <li class="list-group-item font_big"><a href="#"><p class="glyphicon glyphicon-log-out">&nbsp;安全退出</p>
+                <li class="list-group-item font_big"><a href="#"><p class="glyphicon glyphicon-log-out">
+                    &nbsp;安全退出</p>
                 </a></li>
             </ul>
         </div>
@@ -99,6 +124,10 @@
         </div>
     </div>
 </div>
-
+<script>
+    $("#nie").click(function () {
+        $(".nie_nie").slideToggle(300)
+    })
+</script>
 </body>
 </html>
