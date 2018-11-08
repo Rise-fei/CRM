@@ -25,6 +25,8 @@ from journaltaks import urls as journal_url
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^index/', view.index),
+    url(r'^home/', view.home),
+
     url(r'^login/', view.login),
     url(r'^register/', view.register),
     url(r'^logout/', view.logout),

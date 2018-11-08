@@ -3,8 +3,8 @@
 
     <div>
         <h1 class="text-center">用户资料信息表</h1>
-        <button class="btn btn-default btn-lg" ><a href="/register/">新增用户</a></button>
-        <button class="btn btn-default btn-lg" ><a href="/userpermission/accredit/">用户授权</a></button>
+        <a class="btn btn-warning btn-lg" href="/register/">新增用户</a>
+        <a class="btn btn-primary btn-lg" href="/userpermission/accredit/">用户授权</a>
         <table class="table table-striped">
             <thead>
                 <th>编号</th>
@@ -30,14 +30,14 @@
                         <td>{{ user.create_time |date:"Y-m-d H:i" }}</td>
 
                         <td>
-                            <a href="/userpermission/edit_user/{{ user.nid }}/">
-                                <button class="btn btn-info">编辑</button>
+                            <a class="btn btn-primary active" role="button" href="/userpermission/edit_user/{{ user.nid }}/">
+                               编辑
                             </a>
-                            <a href="/userpermission/delete_user/{{ user.nid }}/">
-                                <button class="btn btn-primary">删除</button>
+                            <a class="btn btn-info active" role="button" href="/userpermission/delete_user/{{ user.nid }}/">
+                                删除
                             </a>
-                            <a href="/userpermission/cat_user/{{ user.nid }}/">
-                                <button class="btn btn-danger">查看</button>
+                            <a class="btn btn-warning active" role="button" href="/userpermission/cat_user/{{ user.nid }}/">
+                                查看
                             </a>
                         </td>
 

@@ -1,0 +1,26 @@
+{% extends "index.html" %}
+{% block public %}  <!-- 扩展base中的block content部分 -->
+
+    <div class="container">
+        <h1 class="text-center">资料信息详情</h1>
+        <br><br><br>
+
+        <div class="text-center">
+            <h2>资料基本信息</h2>
+            <hr>
+
+            <h4>资料名称：{{ essay_obj.essay_title }}</h4><br><br><br>
+            <h4>资料分类：{{ essay_obj.category.category }}</h4><br><br><br>
+
+
+            <h4>文件类型：{{ essay_obj.file.type }}</h4><br><br><br>
+            <h4>上传文件</h4><br><br><br>
+
+            <h4>备注：{{ essay_obj.comment }}</h4><br><br><br>
+            <h4>作者：{{ essay_obj.author }}</h4><br><br><br>
+        </div>
+    <a type="button" href="/userpermission/essay_manage/" class="btn btn-danger btn-lg col-md-offset-5 col-md-2">关闭</a>
+    </div>
+
+
+{% endblock %}
