@@ -1,0 +1,78 @@
+{% extends 'index.html' %}
+{% block public %}
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-5 center-block">
+            {#            <div class="panel panel-default">#}
+            <div class="panel-heading text-center">
+                <h4>产品信息</h4>
+            </div>
+            <div class="panel-body text-center">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td>产品ID: {{ obj.id }}</td>
+                    </tr>
+                    <tr>
+                        <td>产品名称: {{ obj.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>机构名称: {{ obj.inst.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>产品类别: {{ obj.kind }}</td>
+                    </tr>
+                    <tr>
+                        <td>产品状态: {{ obj.pstage }}</td>
+                    </tr>
+                    <tr>
+                        <td>使用状态: {{ obj.pstatus }}</td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+        <div class="col-md-5">
+
+            <div class="panel-heading text-center">
+                <h4>合同信息</h4>
+            </div>
+            <div class="panel-body text-center">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td>合同ID: {{ obj.contract.id }}</td>
+                    </tr>
+                    <tr>
+                        <td>合同类型: {{ obj.contract.kind }}</td>
+                    </tr>
+                    <tr>
+                        <td>签约状态: {{ obj.contract.status }}</td>
+                    </tr>
+                    <tr>
+                        <td>合同总金额: {{ obj.contract.money }}</td>
+                    </tr>
+                    <tr>
+                        <td>付款期限: {{ obj.contract.money_date }}</td>
+                    </tr>
+                    <tr>
+                        <td>签约时间: {{ obj.contract.sign_date }}</td>
+                    </tr>
+                    <tr>
+                        <td>开始时间: {{ obj.contract.start_date }}</td>
+                    </tr>
+                    <tr>
+                        <td>结束时间: {{ obj.contract.end_date }}</td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+            {#            </div>#}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,207 @@
+{% extends 'index.html' %}
+{% block public %}
+    <div class="col-sm-10">
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                新增商机信息
+            </div>
+            <div class="panel-body">
+                <form action="/msg/new_chance/" method="post">
+                    {% csrf_token %}
+                    <div class="col-sm-8" style="left: 12em">
+                        <br><br>
+                        <div class="row">
+                            <div class="col-sm-10" style="display: inline-block">
+                                <div class="input-group ">
+                                    <span class="input-group-addon" id="basic-addon3">机构名称</span>
+                                    <input id="iname" type="text" name="iname" class="form-control"
+                                           value="{{ obj.name }}"
+                                           aria-describedby="basic-addon3">
+                                </div>
+                            </div>
+                            <button type="button" id="query_chance" class=" btn btn-success">查询</button>
+
+                        </div>
+
+
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">机构地址</span>
+                            <input id="iaddress" type="text" name="iaddress" class="form-control"
+                                   value="{{ obj.address }}"
+                                   aria-describedby="basic-addon3">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">固话</span>
+                            <input id="iphone" type="text" name="iphone" class="form-control" value="{{ obj.phone }}"
+                                   aria-describedby="basic-addon3">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">机构等级</span>
+                            <input id="iclass" type="text" name="iclass" class="form-control" value="{{ obj.iclass }}"
+                                   aria-describedby="basic-addon3">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">机构状态</span>
+                            <input id="istatus" type="text" name="istatus" class="form-control"
+                                   value="{{ obj.istatus }}"
+                                   aria-describedby="basic-addon3">
+
+                        </div>
+                        <br>
+                        <h4>联系人信息</h4><br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">姓名</span>
+                            <input id="cname" type="text" name="cname" class="form-control"
+                                   value="{{ obj.contact.cname }}"
+                                   aria-describedby="basic-addon3">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">性别</span>
+                            <input id="cgender" type="text" name="cgender" class="form-control"
+                                   value="{{ obj.contact.cgender }}"
+                                   aria-describedby="basic-addon3">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">职位</span>
+                            <input id="cjob" type="text" name="cjob" class="form-control" value="{{ obj.contact.cjob }}"
+                                   aria-describedby="basic-addon3">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">手机</span>
+                            <input id="cphone" type="text" name="cphone" class="form-control"
+                                   value="{{ obj.contact.cphone }}"
+                                   aria-describedby="basic-addon3">
+                        </div>
+                        <br>
+                        <h4>其他信息</h4><br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">年费</span>
+                            <input id="cmoney" type="text" name="money" class="form-control"
+                                   value="{{ obj.chance.money }}"
+                                   aria-describedby="basic-addon3">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">购买时间</span>
+                            <input id="cdate" type="date" name="date" class="form-control"
+                                   value="{{ obj.chance.ctime }}">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">阶段状态</span>
+                            <select class="form-control" name="stage">
+                                <option value="初步接洽"
+                                        {% if obj.chance.stage == '初步接洽' %}
+                                        selected
+                                        {% endif %}>初步接洽
+                                </option>
+
+                                <option value="需求确定"
+                                        {% if obj.chance.stage == '需求确定' %}
+                                        selected
+                                        {% endif %}>需求确定
+                                </option>
+
+                                <option value="方案报价"
+                                        {% if obj.chance.stage == '方案报价' %}
+                                        selected
+                                        {% endif %}>方案报价
+                                </option>
+
+                                <option value="谈判合同"
+                                        {% if obj.chance.stage == '谈判合同' %}
+                                        selected
+                                        {% endif %}>谈判合同
+                                </option>
+
+                                <option value="赢单"
+                                        {% if obj.chance.stage == '赢单' %}
+                                        selected
+                                        {% endif %}>赢单
+                                </option>
+                            </select>
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">跟进状态</span>
+                            <select class="form-control" name="fol">
+                                <option value="初访"
+                                        {% if obj.chance.fol == '初访' %}
+                                        selected
+                                        {% endif %}>初访
+                                </option>
+
+                                <option value="意向"
+                                        {% if obj.chance.fol == '意向' %}
+                                        selected
+                                        {% endif %}>意向
+                                </option>
+
+                                <option value="潜在"
+                                        {% if obj.chance.fol == '潜在' %}
+                                        selected
+                                        {% endif %}>潜在
+                                </option>
+
+                                <option value="报价"
+                                        {% if obj.chance.fol == '报价' %}
+                                        selected
+                                        {% endif %}>报价
+                                </option>
+
+                                <option value="成交"
+                                        {% if obj.chance.fol == '成交' %}
+                                        selected
+                                        {% endif %}>成交
+                                </option>
+                            </select>
+
+                        </div>
+                        <br>
+
+                        <br><br>
+
+                        <div class="center-block">
+                            <button type="submit" class="btn btn-success">提交</button>
+                            <a href="/msg/index/" class="btn btn-danger">取消</a>
+                        </div>
+                        <br><br><br><br>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <script>
+    $('#query_chance').click(function () {
+         var iname = $('#iname').val();
+        $.ajax({
+            url: '/msg/chance_query/',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                'name': iname
+            },
+            success: function (data) {
+
+                $('#iaddress').val(data.iaddress);
+                $('#iphone').val(data.iphone);
+                $('#iclass').val(data.iclass);
+                $('#istatus').val(data.istatus);
+                $('#cname').val(data.cname);
+                $('#cphone').val(data.cphone);
+                $('#cjob').val(data.cjob);
+                $('#cgender').val(data.cgender);
+            }
+        });
+    })
+
+    </script>
+{% endblock %}
