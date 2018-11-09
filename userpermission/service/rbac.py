@@ -12,7 +12,7 @@ class ValidPermission(MiddlewareMixin):
         current_path = request.path_info  # 当前路径
         print(current_path)
 
-        valid_url_list=['/login/','/register/','/admin/.*','/index/','/logout/','/get_valid_img.png/',]
+        valid_url_list=['/login/','/register/','/home','/admin/.*','/index/','/logout/','/get_valid_img.png/',]
 
         for valid_url in valid_url_list:
             result=re.match(valid_url,current_path)
