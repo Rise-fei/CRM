@@ -36,11 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'userpermission.apps.UserpermissionConfig',
-
     'msg.apps.MsgConfig',
-
     'journaltaks.apps.JournaltaksConfig',
-
 ]
 
 MIDDLEWARE = [
@@ -51,7 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'userpermission.service.rbac.ValidPermission',
+    # 'userpermission.service.rbac.ValidPermission',
 ]
 # from userpermission.service.rbac import  ValidPermission
 
