@@ -1,0 +1,53 @@
+{% extends 'index.html' %}
+{% block public %}
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+{#                    <li><a href="/msg/newcontact/">新增联系人</a></li>#}
+                    <li><a href="/msg/index/">机构信息</a></li>
+                </ul>
+                <form class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="请输入关键字">
+                    </div>
+                    <button type="submit" class="btn btn-primary">查询</button>
+                </form>
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div class="bs-example" data-example-id="simple-table">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>职位</th>
+                <th>手机</th>
+                <th>机构</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for foo in obj %}
+                <tr>
+                    <td>{{ foo.id }}</td>
+                    <td>{{ foo.cname }}</td>
+                    <td>{{ foo.cgender }}</td>
+                    <td>{{ foo.cjob }}</td>
+                    <td>{{ foo.cphone }}</td>
+                    <td>{{ foo.inst.name }}</td>
+                    <td>
+                        <a href="/msg/edit_inst/{{ foo.inst.id}}/">编辑</a>
+                        <a href="/msg/del_cont/{{ foo.id }}/">删除</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'index.html' %}
+
+{% block public %}
+    <div class="edit_header col-sm-offset-5">
+        <h2>售后日志信息详情</h2>
+    </div>
+    <div class="class1">
+        <h4>售后日志详细信息</h4>
+    </div>
+    <form class="body_header form-horizontal" action="checkBespeak.html" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <span class="col-sm-2 control-label">售后标题：</span>
+            <span class="check_date">{{ check_list.title }}</span>
+        </div>
+        <div class="form-group">
+            <span class="col-sm-2 control-label">机构名称：</span>
+            <span class="check_date">{{ check_list.organ.name }}</span>
+        </div>
+        <div class="form-group">
+            <span class="col-sm-2 control-label">售后类型：</span>
+            <span class="check_date">{{ check_list.sale_type.sale_type }}</span>
+        </div>
+        <div class="form-group">
+            <span class="col-sm-2 control-label">联系人：</span>
+            <span class="check_date">{{ check_list.contact_name }}</span>
+        </div>
+        <div class="form-group">
+            <span class="col-sm-2 control-label">发布时间：</span>
+            <span class="check_date">{{ check_list.create_time }}</span>
+        </div>
+        <div class="form-group">
+            <span class="col-sm-2 control-label">处理状态：</span>
+            <span class="check_date">{{ check_list.state }}</span>
+        </div>
+        <div class="btn_bottom col-sm-6 col-md-offset-4">
+            <a href="/wang/afterSale/">
+                <button type="button" class="btn btn-primary col-sm-2">关闭</button>
+            </a>
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,177 @@
+{% extends 'index.html' %}
+{% block public %}
+    <div class="col-sm-10 col-sm-offset-1">
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                创建产品信息
+            </div>
+            <div class="panel-body">
+                <form action="/msg/newpro/" method="post">
+                    {% csrf_token %}
+                    <div class="col-sm-8" style="left: 12em">
+                        <br><br>
+
+                        <div class="input-group ">
+                            <span class="input-group-addon" id="basic-addon3">产品名称</span>
+                            <input id="pname" type="text" name="pname" class="form-control"
+                                   value="{{ obj.name }}"
+                                   aria-describedby="basic-addon3">
+                        </div>
+
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">机构ID</span>
+                            <input id="inst_id" type="text" name="inst_id" class="form-control"
+                                   value="{{ obj.inst.id }}"
+                                   aria-describedby="basic-addon3">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">产品类别</span>
+                            <input id="pkind" type="text" name="pkind" class="form-control" value="{{ obj.kind }}"
+                                   aria-describedby="basic-addon3">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">产品状态</span>
+                            <select class="form-control" name="pstage">
+                                <option value="未开通"
+                                        {% if obj.pstage == '未开通' %}
+                                        selected
+                                        {% endif %}>未开通
+                                </option>
+
+                                <option value="开通"
+                                        {% if obj.pstage == '开通' %}
+                                        selected
+                                        {% endif %}>开通
+                                </option>
+
+
+                            </select>
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">使用状态</span>
+                            <select class="form-control" name="pstatus">
+                                <option value="未使用"
+                                        {% if obj.pstatus == '未使用' %}
+                                        selected
+                                        {% endif %}>未使用
+                                </option>
+
+                                <option value="试用"
+                                        {% if obj.pstatus == '试用' %}
+                                        selected
+                                        {% endif %}>试用
+                                </option>
+
+                                <option value="正式使用"
+                                        {% if obj.pstatus == '正式使用' %}
+                                        selected
+                                        {% endif %}>正式使用
+                                </option>
+
+
+                            </select>
+
+                        </div>
+                        <br>
+                        <h4>合同信息</h4><br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">合同名称</span>
+                            <input id="crname" type="text" name="crname" class="form-control" value="{{ obj.contract.name }}"
+                                   aria-describedby="basic-addon3">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">合同类型</span>
+                            <select class="form-control" name="crkind">
+                                <option value="销售"
+                                        {% if obj.contract.kind == '销售' %}
+                                        selected
+                                        {% endif %}>销售
+                                </option>
+
+                                <option value="采购"
+                                        {% if obj.contract.kind == '采购' %}
+                                        selected
+                                        {% endif %}>采购
+                                </option>
+                            </select>
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">签约状态</span>
+                            <select class="form-control" name="crstatus">
+                                <option value="新增"
+                                        {% if obj.contract.status == '新增' %}
+                                        selected
+                                        {% endif %}>新增
+                                </option>
+
+                                <option value="意向"
+                                        {% if obj.contract.status == '意向' %}
+                                        selected
+                                        {% endif %}>意向
+                                </option>
+
+                                <option value="已签"
+                                        {% if obj.contract.status == '已签' %}
+                                        selected
+                                        {% endif %}>已签
+                                </option>
+
+                                <option value="续约"
+                                        {% if obj.contract.status == '续约' %}
+                                        selected
+                                        {% endif %}>续约
+                                </option>
+                            </select>
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">合同总金额</span>
+                            <input id="crmoney" type="text" name="crmoney" class="form-control" value="{{ obj.contract.money }}"
+                                   aria-describedby="basic-addon3">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">付款期限</span>
+                            <input id="mdate" type="date" name="mdate" class="form-control" value="{{ obj.contract.money_date |date:'Y-m-d' }}"
+                                   aria-describedby="basic-addon3">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">签约时间</span>
+                            <input id="signdate" type="date" name="signdate" class="form-control" value="{{ obj.contract.sign_date |date:'Y-m-d' }}"
+                                   aria-describedby="basic-addon3">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">开始时间</span>
+                            <input id="stdate" type="date" name="stdate" class="form-control" value="{{ obj.contract.start_date |date:'Y-m-d' }}"
+                                   aria-describedby="basic-addon3">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">结束时间</span>
+                            <input id="endate" type="date" name="endate" class="form-control" value="{{ obj.contract.end_date |date:'Y-m-d' }}"
+                                   aria-describedby="basic-addon3">
+                        </div>
+                        <br>
+                        <br><br>
+
+                        <div class="center-block">
+                            <button type="submit" class="btn btn-success">提交</button>
+                            <a href="/msg/index/" class="btn btn-danger">取消</a>
+                        </div>
+                        <br><br><br><br>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

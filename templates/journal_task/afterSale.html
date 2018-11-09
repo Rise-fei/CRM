@@ -1,4 +1,4 @@
-{% extends 'journal_task/mod.html' %}
+{% extends 'index.html' %}
 
 {% block public %}
     <div class="journal_header col-sm-offset-5">
@@ -6,7 +6,10 @@
     </div>
     <div class="new_btn">
         <div class="left_btn col-sm-4">
-            <a href="/wang/newAfterSale/"><button type="button" class="btn btn-primary new_add_btn">新增售后日志</button></a>
+            <a href="/wang/newAfterSale/">
+                <button type="button" class="btn btn-primary new_add_btn">新增售后日志</button>
+            </a>
+            <button type="button" class="btn btn-primary new_add_btn" id="many_del">删除</button>
         </div>
         <div class="right_btn">
             <input type="text" placeholder="请输入关键字">
@@ -23,6 +26,7 @@
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
+                <th role="button" id="checkbox_on">选择</th>
                 <th>编号</th>
                 <th>售后标题</th>
                 <th>机构名称</th>
@@ -30,21 +34,23 @@
                 <th>联系人</th>
                 <th>发布时间</th>
                 <th>处理状态</th>
+                <th>操作</th>
                 </thead>
-                 <tbody>
+                <tbody>
                 {% for after_sale in after_sale_list %}
                     <tr>
+                        <td><input type="checkbox" value="{{ after_sale.number }}" id="onclick_checkbox" name="onclick_checkbox"></td>
                         <td>{{ after_sale.number }}</td>
                         <td>{{ after_sale.title }}</td>
-                        <td>{{ after_sale.organ_after_sale.name }}</td>
+                        <td>{{ after_sale.organ.name }}</td>
                         <td>{{ after_sale.sale_type }}</td>
-                        <td>{{ after_sale.organ_after_sale.contact_name }}</td>
+                        <td>{{ after_sale.contact_name }}</td>
                         <td>{{ after_sale.create_time }}</td>
                         <td>{{ after_sale.state }}</td>
                         <td>
-                            <a href="/wang/editAfterSale/id={{ after_sale.nid }}/">编辑</a>
-                            <a href="/wang/delAfterSale/id={{ after_sale.nid }}/">删除</a>
-                            <a href="/wang/checkAfterSale/id={{ after_sale.nid }}/">查看</a>
+                            <a href="/wang/editAfterSale/id={{ after_sale.number }}/">编辑</a>
+                            <a href="/wang/delAfterSale/id={{ after_sale.number }}/">删除</a>
+                            <a href="/wang/checkAfterSale/id={{ after_sale.number }}/">查看</a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -52,6 +58,5 @@
             </table>
         </div>
     </div>
-    <script>
-    </script>
+    <script src="/static/static_wang/js/js3.js"></script>
 {% endblock %}

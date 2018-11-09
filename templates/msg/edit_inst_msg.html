@@ -1,0 +1,112 @@
+{% extends 'index.html' %}
+{% block public %}
+    <div class="col-sm-10">
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                编辑机构信息
+            </div>
+            <div class="panel-body">
+                <form action="/msg/edit_inst/{{ obj.id }}/" method="post">
+                    {% csrf_token %}
+                    <div class="col-sm-8" style="left: 12em">
+                        <br><br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">机构名称</span>
+                            <input type="text" name="iname" class="form-control" value="{{ obj.name }}"
+                                   aria-describedby="basic-addon3">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">机构地址</span>
+                            <input type="text" name="iaddress" class="form-control" value="{{ obj.address }}"
+                                   aria-describedby="basic-addon3">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">固话</span>
+                            <input type="text" name="iphone" class="form-control" value="{{ obj.phone }}"
+                                   aria-describedby="basic-addon3">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">机构等级</span>
+                            <input type="text" name="iclass" class="form-control" value="{{ obj.iclass }}"
+                                   aria-describedby="basic-addon3">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">机构状态</span>
+                            <input type="text" name="istatus" class="form-control" value="{{ obj.istatus }}"
+                                   aria-describedby="basic-addon3">
+
+                        </div>
+                        <br>
+                        <h4>联系人信息</h4><br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">姓名</span>
+                            <input type="text" name="cname" class="form-control" value="{{ obj.contact.cname }}"
+                                   aria-describedby="basic-addon3">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">性别</span>
+                            <input type="text" name="cgender" class="form-control" value="{{ obj.contact.cgender }}"
+                                   aria-describedby="basic-addon3">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">职位</span>
+                            <input type="text" name="cjob" class="form-control" value="{{ obj.contact.cjob }}"
+                                   aria-describedby="basic-addon3">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3">手机</span>
+                            <input type="text" name="cphone" class="form-control" value="{{ obj.contact.cphone }}"
+                                   aria-describedby="basic-addon3">
+                        </div>
+{#                        <br>#}
+{#                        <h4>其他信息</h4><br>#}
+{#                        <div class="input-group">#}
+{#                            <span class="input-group-addon" id="basic-addon3">年费</span>#}
+{#                            <input type="text" name="cphone" class="form-control" value="{{ obj.chance.money }}"#}
+{#                                   aria-describedby="basic-addon3">#}
+{#                        </div>#}
+{#                        <br>#}
+{#                        <div class="input-group">#}
+{#                            <span class="input-group-addon" id="basic-addon3">购买时间</span>#}
+{#                            <input type="data" name="cphone" class="form-control" value="{{ obj.chance.ctime }}">#}
+{#                        </div>#}
+{#                        <br>#}
+{#                        <div class="input-group">#}
+{#                            <span class="input-group-addon" id="basic-addon3">阶段状态</span>#}
+{#                            <select class="form-control">#}
+{#                                <option value="初步接洽">初步接洽</option>#}
+{#                                <option value="需求确定">需求确定</option>#}
+{#                                <option value="方案报价">方案报价</option>#}
+{#                                <option value="谈判合同">谈判合同</option>#}
+{#                                <option value="赢单">赢单</option>#}
+{#                            </select>#}
+{#                        </div>#}
+{#                        <br>#}
+{#                        <div class="input-group">#}
+{#                            <span class="input-group-addon" id="basic-addon3">跟进状态</span>#}
+{#                            <input type="text" name="cphone" class="form-control" value="{{ obj.chance.fol }}"#}
+{#                                   aria-describedby="basic-addon3">#}
+{#                        </div>#}
+{#                        <br>#}
+
+                        <br><br>
+
+                        <div class="center-block">
+                            <button type="submit" class="btn btn-success">提交</button>
+                            <a href="/msg/index/" class="btn btn-danger">取消</a>
+                        </div>
+                        <br><br><br><br>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

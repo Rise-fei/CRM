@@ -1,0 +1,75 @@
+{% extends 'index.html' %}
+
+{% block public %}
+    <div class="edit_header col-sm-offset-5">
+        <h2>创建任务信息</h2>
+    </div>
+    <div class="class1">
+        <h4>任务基本信息</h4>
+    </div>
+    <form class="body_header form-horizontal" action="/wang/newTask/" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <p class="col-sm-2 control-label">机构名称：</p>
+            <div class="col-sm-5" style="white-space:nowrap;">
+                <select type="text" class="form-control" id="organ_id" name="organ_id">
+                    {% for organ in organ_list %}
+                        <option value="{{ organ.number }}">{{ organ.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="button" class="btn btn-primary col-sm-1">查询</button>
+        </div>
+        <div class="form-group">
+            <p class="col-sm-2 control-label">产品分类：</p>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="classify_id" name="classify_id"
+                       value="">
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="col-sm-2 control-label">任务成员：</p>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="Task_person" name="Task_person"
+                       value="{{ task_obj.Task_person }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="col-sm-2 control-label">任务级别：</p>
+            <div class="col-sm-3">
+                <select type="text" class="form-control" id="res_state" name="state_id">
+                    {% for level in level_list %}
+                        <option value="{{ level.nid }}">{{ level.level }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="col-sm-2 control-label">发布时间：</p>
+            <div class="col-sm-3">
+                <input type="date" class="form-control" id="create_time" name="create_time" value="{{ task_obj.create_time }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="col-sm-2 control-label">操作时间：</p>
+            <div class="col-sm-3">
+                <input type="date" class="form-control" id="data_time" name="data_time" value="{{ task_obj.date_time }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="col-sm-2 control-label">任务内容：</p>
+            <div class="col-sm-5">
+                <textarea class="form-control" id="content" name="content"></textarea>
+            </div>
+        </div>
+        <div class="btn_bottom col-sm-6 col-md-offset-4">
+            <button type="submit" class="btn btn-primary col-sm-2">确定</button>
+            <a href="/wang/task/">
+                <button type="button" class="btn btn-primary col-sm-2">取消</button>
+            </a>
+        </div>
+    </form>
+    <script>
+
+    </script>
+{% endblock %}

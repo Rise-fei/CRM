@@ -20,7 +20,11 @@ from journaltaks import views as j_vi
 from django.views.static import serve#需要导入
 from django.conf import settings
 from userpermission import urls as url_fei
+
+from msg import urls as msg_url
+
 from journaltaks import urls as journal_url
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -35,5 +39,9 @@ urlpatterns = [
     url(r'^change_pw/(\d+)/', view.change_pw),
     url(r'^get_valid_img.png/', view.getValidImg),
     url(r'^userpermission/', include(url_fei)),
+
+    url(r'^msg/', include(msg_url)),
+
     url(r'^wang/', include(journal_url)),
+
 ]

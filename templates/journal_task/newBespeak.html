@@ -1,4 +1,4 @@
-{% extends 'journal_task/mod.html' %}
+{% extends 'index.html' %}
 
 {% block public %}
     <div class="edit_header col-sm-offset-5">
@@ -7,42 +7,69 @@
     <div class="class1">
         <h4>预约基本信息</h4>
     </div>
-    <form class="body_header form-horizontal" action="newJournal.html" method="post">
+    <form class="body_header form-horizontal" action="/wang/newBespeak/" method="post">
         {% csrf_token %}
         <div class="form-group">
             <p class="col-sm-2 control-label">机构名称：</p>
             <div class="col-sm-5" style="white-space:nowrap;">
-                <input type="text" class="form-control" id="name" name="name">
+                <select type="text" class="form-control" id="organ_id" name="organ_id">
+                    {% for organ in organ_list %}
+                        <option value="{{ organ.number }}">{{ organ.name }}</option>
+                    {% endfor %}
+                </select>
             </div>
             <button type="button" class="btn btn-primary col-sm-1">查询</button>
         </div>
         <div class="form-group">
             <p class="col-sm-2 control-label">预约时间：</p>
             <div class="col-sm-3">
-                <input type="text" class="form-control" id="create_time" name="create_time" value="{{ bespeak_list.create_time }}">
+                <input type="date" class="form-control" id="create_time" name="create_time"
+                       value="{{ bespeak_list.create_time }}">
             </div>
         </div>
         <div class="form-group">
             <p class="col-sm-2 control-label">操作人：</p>
             <div class="col-sm-3">
-                <input type="text" class="form-control" id="operator" name="operator" value="{{ bespeak_list.operator }}">
+                <input type="text" class="form-control" id="operator" name="operator"
+                       value="{{ bespeak_list.operator }}">
             </div>
         </div>
         <div class="form-group">
             <p class="col-sm-2 control-label">预约状态：</p>
             <div class="col-sm-3">
-                <input type="text" class="form-control" id="res_state" name="res_state" value="{{ bespeak_list.state.res_state }}">
+                <select type="text" class="form-control" id="res_state" name="state_id">
+                    {% for state in state_list %}
+                        <option value="{{ state.nid }}">{{ state.res_state }}</option>
+                    {% endfor %}
+                </select>
             </div>
         </div>
         <div class="form-group">
             <p class="col-sm-2 control-label">操作时间：</p>
             <div class="col-sm-3">
-                <input type="text" class="form-control" id="data_time" name="data_time" value="{{ bespeak_list.data_time }}">
+                <input type="date" class="form-control" id="create_time" name="create_time" value="{{ bespeak_list.create_time }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="col-sm-2 control-label">预计结束时间：</p>
+            <div class="col-sm-3">
+                <input type="date" class="form-control" id="data_time" name="data_time" value="{{ bespeak_list.date_time }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="col-sm-2 control-label">预约内容：</p>
+            <div class="col-sm-5">
+                <textarea class="form-control" id="content" name="content"></textarea>
             </div>
         </div>
         <div class="btn_bottom col-sm-6 col-md-offset-4">
             <button type="submit" class="btn btn-primary col-sm-2">确定</button>
-            <a href="/wang/bespeak/"><button type="button" class="btn btn-primary col-sm-2">取消</button></a>
+            <a href="/wang/bespeak/">
+                <button type="button" class="btn btn-primary col-sm-2">取消</button>
+            </a>
         </div>
     </form>
+    <script>
+
+    </script>
 {% endblock %}
