@@ -1,0 +1,69 @@
+{% extends 'index.html' %}
+
+{% block public %}
+    <div class="journal_header col-sm-offset-5">
+        <h2>日志信息列表</h2>
+    </div>
+    <div class="new_btn">
+        <div class="left_btn col-sm-4">
+            <a href="/wang/newJournal/">
+                <button type="button" class="btn btn-primary new_add_btn">新增日志</button>
+            </a>
+            <button type="button" class="btn btn-primary new_add_btn" id="many_del">删除</button>
+        </div>
+        <form action="" method="post">
+            <div class="right_btn">
+                <input type="text" placeholder="请输入关键字" name="search_key" id="search_key">
+                <select type="text" class="select_text" id="select_text" name="select_text">
+                    <option value="1">机构名称</option>
+                    <option value="2">机构类型</option>
+                    <option value="3">日志所属人</option>
+                    <option value="4">联系人</option>
+                    <option value="5">日志等级</option>
+                </select>
+                <button type="button" class="btn btn-primary btn_inquiry">查询</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="journal_list">
+        <div class="table-responsive">
+            <table class="table table-bordered tale_inquiry">
+                <thead>
+                <th role="button" id="checkbox_on">选择</th>
+                <th>编号</th>
+                <th>机构名称</th>
+                <th>机构类型</th>
+                <th>日志所属人</th>
+                <th>联系人</th>
+                <th>日志日期</th>
+                <th>日志等级</th>
+                <th>操作</th>
+                </thead>
+                <tbody>
+                {% for journal in journal_list %}
+                    <tr>
+                        <td><input type="checkbox" value="{{ journal }}" id="onclick_checkbox"
+                                   name="onclick_checkbox"></td>
+                        <td>{{ journal.number }}</td>
+                        <td><a href="/wang/checkJournal/id={{ journal.number }}/">{{ journal.organ.name }}</a></td>
+                        <td>{{ journal.organ.organ_type }}</td>
+                        <td>{{ journal.personal }}</td>
+                        <td>{{ journal.organ.contact.contact_name }}</td>
+                        <td>{{ journal.create_time }}</td>
+                        <td>{{ journal.jou_level }}</td>
+                        <td>
+                            <a href="/wang/editJournal/id={{ journal.number }}/">编辑</a>
+                            <a href="/wang/delJournal/id={{ journal.number }}/">删除</a>
+                            <a href="/wang/checkJournal/id={{ journal.number }}/">查看</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% csrf_token %}
+    <script src="/static/static_wang/js/js1.js"></script>
+    <script src="/static/static_wang/js/inquiry.js"></script>
+{% endblock %}

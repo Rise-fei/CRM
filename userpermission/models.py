@@ -17,11 +17,9 @@ class UserInfo(AbstractUser):
     """
     nid = models.AutoField(primary_key=True)
     create_time=models.DateTimeField(auto_now_add=True)
-    role = models.ManyToManyField(to="Role")
-    employee=models.ForeignKey(to="Employee")
-    # department_name =models.CharField(max_length=30)
-    # job_name= models.CharField(max_length=30)
-    # job_category=models.CharField(max_length=30)
+    employee=models.OneToOneField(to="Employee")
+    status=models.BooleanField(default=False)
+    role = models.ManyToManyField(to="Role",null=True)
 class Employee(models.Model):
     '''
     员工表     employee
@@ -31,11 +29,10 @@ class Employee(models.Model):
     手机号码
     创建日期
     状态
-    员工-部门    一个员工属于一个部门
-    员工-职位    一个员工对应一个职位
+    员工-部门    一个员工属于一个部门  外键
+    员工-职位    一个员工对应一个职位  外键
     '''
     id=models.AutoField(primary_key=True)
-    employee_id=models.IntegerField()
     employee_name=models.CharField(max_length=30)
     phone = models.CharField(max_length=11)
     create_time = models.DateTimeField(auto_now_add=True)
@@ -64,7 +61,29 @@ class Role(models.Model):
     role_name=models.CharField(max_length=30)
     permission = models.ManyToManyField(to="Permission")
 
+
 class Permission(models.Model):
     nid = models.AutoField(primary_key=True)
     permission_name=models.CharField(max_length=30)
-    status=models.BooleanField()
+    url=models.CharField(max_length=200)
+    action=models.CharField(max_length=30,default="")
+    group=models.ForeignKey(to="PermissionGroup",default=1)
+
+
+class PermissionGroup(models.Model):
+    title=models.CharField(max_length=30)
+    def __str__(self):
+        return self.title
+
+
+class Essay_category(models.Model):
+    category = models.CharField(max_length=30)
+class File(models.Model):
+    type=models.CharField(max_length=30)
+class Essay(models.Model):
+    essay_title=models.CharField(max_length=200)
+    category=models.ForeignKey(to="Essay_category")
+    file=models.ForeignKey(to="File")
+    comment=models.TextField(max_length=300)
+    author=models.CharField(max_length=30)
+    file_file = models.FileField(default=None)

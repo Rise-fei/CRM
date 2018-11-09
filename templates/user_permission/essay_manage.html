@@ -1,0 +1,45 @@
+{% extends "index.html" %}
+{% block public %}  <!-- 扩展base中的block content部分 -->
+
+    <div class="container">
+        <h1 class="text-center">资料信息如下</h1>
+        <br>
+        <br>
+        <br>
+        <a class="btn btn-warning btn-lg" href="/userpermission/add_essay/">新增资料</a>
+        <table class="table table-striped">
+            <thead>
+            <th>编号</th>
+            <th>资料名称</th>
+            <th>资料分类</th>
+            <th>文档分类</th>
+            <th>作者</th>
+            <th>操作</th>
+            </thead>
+            <tbody>
+             {% for essay in essay_list%}
+                    <tr>
+                        <td>{{ essay.id }}</td>
+                        <td>{{ essay.essay_title}}</td>
+                        <td>{{ essay.category.category }}</td>
+                        <td>{{ essay.file.type }}</td>
+                        <td>{{ essay.author }}</td>
+                        <td>
+                            <a href="/userpermission/edit_essay/{{ essay.id }}/">
+                                <button class="btn btn-info">编辑</button>
+                            </a>
+                            <a href="/userpermission/delete_essay/{{ essay.id }}/">
+                                <button class="btn btn-primary">删除</button>
+                            </a>
+                            <a href="/userpermission/cat_essay/{{ essay.id }}/">
+                                <button class="btn btn-danger">查看</button>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+{% endblock %}

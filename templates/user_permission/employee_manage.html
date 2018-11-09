@@ -1,0 +1,52 @@
+{% extends "index.html" %}
+{% block public %}  <!-- 扩展base中的block content部分 -->
+
+    <div class="container">
+        <h1 class="text-center">员工信息如下</h1>
+        <br>
+        <br>
+        <br>
+        <a class="btn btn-warning btn-lg" href="/userpermission/add_employee/">新增员工</a>
+        <table class="table table-striped">
+            <thead>
+            <th>编号</th>
+            <th>员工姓名</th>
+            <th>联系方式</th>
+            <th>创建时间</th>
+            <th>是否对应用户</th>
+            <th>部门</th>
+            <th>职位</th>
+            <th>操作</th>
+            </thead>
+            <tbody>
+             {% for employee in employee_list%}
+                    <tr>
+                        <td>{{ employee.id }}</td>
+                        <td>{{ employee.employee_name }}</td>
+                        <td>{{ employee.phone }}</td>
+                        <td>{{ employee.create_time |date:"Y-m-d H:i" }}</td>
+                        <td>{% if employee.status %}
+                            yes{% else %}no
+                        {% endif %}</td>
+                        <td>{{ employee.department.department_name }}</td>
+                        <td>{{ employee.job.job_name}}</td>
+                        <td>
+                            <a href="/userpermission/edit_employee/{{ employee.id }}/">
+                                <button class="btn btn-info">编辑</button>
+                            </a>
+                            <a href="/userpermission/delete_employee/{{ employee.id }}/">
+                                <button class="btn btn-primary">删除</button>
+                            </a>
+                            <a href="/userpermission/cat_employee/{{ employee.id }}/">
+                                <button class="btn btn-danger">查看</button>
+                            </a>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+{% endblock %}

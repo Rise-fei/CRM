@@ -1,0 +1,59 @@
+{% extends 'index.html' %}
+
+{% block public %}
+    <div class="edit_header col-sm-offset-5">
+        <h2>任务清单详情信息</h2>
+    </div>
+    <div class="class1">
+        <h4>任务基本详细信息</h4>
+    </div>
+    <form class="body_header form-horizontal" action="editTask.html" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <span class="col-sm-2 control-label">机构名称：</span>
+            <span class="check_date">
+                {% for foo in task_obj.organ.all %}
+                    {{ foo }}
+                {% endfor %}
+            </span>
+        </div>
+        <div class="form-group">
+            <span class="col-sm-2 control-label">产品分类：</span>
+            <span class="check_date">{{ task_obj.classify.classify }}</span>
+        </div>
+        <div class="form-group">
+            <span class="col-sm-2 control-label">任务成员：</span>
+            <span class="check_date">{{ task_obj.Task_person }}</span>
+        </div>
+        <div class="form-group">
+            <span class="col-sm-2 control-label">任务级别：</span>
+            <span class="check_date">{{ task_obj.level.level }}</span>
+        </div>
+        <div class="form-group">
+            <span class="col-sm-2 control-label">发布时间：</span>
+            <span class="check_date">{{ task_obj.create_time }}</span>
+        </div>
+        <div class="form-group">
+            <span class="col-sm-2 control-label">操作时间：</span>
+            <span class="check_date">{{ task_obj.date_time }}</span>
+        </div>
+        <div class="form-group">
+            <span class="col-sm-2 control-label">任务内容：</span>
+            <span class="check_date">{{ task_obj.content }}</span>
+        </div>
+        <div class="class1" style="margin-top: 30px">
+            <h4>任务回复信息</h4>
+        </div>
+        <div class="form-group">
+            <p class="col-sm-2 control-label">任务说明：</p>
+            <div class="col-sm-5">
+                <textarea class="form-control" id="content_say" name="content_say"></textarea>
+            </div>
+        </div>
+        <div class="btn_bottom col-sm-6 col-md-offset-4">
+            <a href="/wang/task/">
+                <button type="button" class="btn btn-primary col-sm-2">关闭</button>
+            </a>
+        </div>
+    </form>
+{% endblock %}
