@@ -1,0 +1,100 @@
+{% extends 'index.html' %}
+{% block public %}
+    <h2 class="text-center">机构详细信息</h2>
+    <img id="u60_img" class="img center-block" src="/static/msg/img/u60.png">
+    <br>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-5 center-block">
+            {#            <div class="panel panel-default">#}
+            <div class="panel-heading text-center">
+                <h4>基本信息</h4>
+            </div>
+            <div class="panel-body text-center">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td>机构ID: {{ obj.id }}</td>
+                    </tr>
+                    <tr>
+                        <td>机构名称: {{ obj.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>机构地址: {{ obj.address }}</td>
+                    </tr>
+                    <tr>
+                        <td>机构固话: {{ obj.phone }}</td>
+                    </tr>
+                    <tr>
+                        <td>机构等级: {{ obj.iclass }}</td>
+                    </tr>
+                    <tr>
+                        <td>机构状态: {{ obj.istatus }}</td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            {#            </div>#}
+
+        </div>
+        <div class="col-md-5">
+            {#            <div class="panel panel-default">#}
+            <div class="panel-heading text-center">
+                <h4>联系人信息</h4>
+            </div>
+            <div class="panel-body text-center">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td>联系人ID: {{ obj.contact.id }}</td>
+                    </tr>
+                    <tr>
+                        <td>联系人名称: {{ obj.contact.cname }}</td>
+                    </tr>
+                    <tr>
+                        <td>性别: {{ obj.contact.cgender }}</td>
+                    </tr>
+                    <tr>
+                        <td>手机: {{ obj.contact.cphone }}</td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+            {#            </div>#}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5 col-md-offset-1">
+            {#            <div class="panel panel-default">#}
+            <div class="panel-heading text-center">
+                <h4>其他信息</h4>
+            </div>
+            <div class="panel-body text-center">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td>商机ID: {{ obj.chance.id }}</td>
+                    </tr>
+                    <tr>
+                        <td>年费: {{ obj.chance.money }}</td>
+                    </tr>
+                    <tr>
+                        <td>购买时间: {{ obj.chance.ctime }}</td>
+                    </tr>
+                    <tr>
+                        <td>阶段状态: {{ obj.chance.stage }}</td>
+                    </tr>
+                    <tr>
+                        <td>跟进状态: {{ obj.chance.fol }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

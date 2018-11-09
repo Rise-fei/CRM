@@ -1,0 +1,71 @@
+{% extends 'index.html' %}
+{% block public %}
+    <nav class="navbar">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="/msg/newpro/" >新增产品</a></li>
+                </ul>
+                <form class="navbar-form navbar-right" method="post" action="/msg/query_pro/">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" name="select_text" class="form-control" placeholder="请输入关键字">
+                        <select name="select_kind" class="form-control">
+                            <option>产品类别</option>
+                            <option>产品名称</option>
+                            <option>机构名称</option>
+                            <option>产品状态</option>
+                            <option>使用状态</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">查询</button>
+                </form>
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div class="bs-example" data-example-id="simple-table">
+        <table class="table">
+            {#    <caption><button class=btn-primary">新增机构</button></caption>#}
+            <thead>
+            <tr>
+                <th>编号</th>
+                <th>产品名称</th>
+                <th>机构名称</th>
+                <th>产品类别</th>
+                <th>产品状态</th>
+                <th>联系人</th>
+                <th>审核状态</th>
+                <th>使用状态</th>
+                <th>开通日期</th>
+                <th>操作</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for foo in obj %}
+                <tr>
+                    <td>{{ foo.id }}</td>
+                    <td>{{ foo.name }}</td>
+                    <td>{{ foo.inst.name }}</td>
+                    <td>{{ foo.kind }}</td>
+                    <td>{{ foo.pstage }}</td>
+                    <td>{{ foo.inst.contact.cname }}</td>
+
+                    <td>{{ foo.inst.istatus }}</td>
+                    <td>{{ foo.pstatus }}</td>
+                    <td>{{ foo.contract.start_date }}</td>
+                    <td>
+                        <a href="/msg/newpro/?sid={{ foo.id }}">编辑</a>
+                        <a href="/msg/del_pro/{{ foo.id }}/">删除</a>
+                        <a href="/msg/info_pro/{{ foo.id }}/">查看</a>
+
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
