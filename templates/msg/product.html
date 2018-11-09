@@ -6,11 +6,19 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a  href="/msg/newpro/" class="btn btn-primary">新增产品</a></li>
+                    <li><a href="/msg/newpro/" >新增产品</a></li>
                 </ul>
-                <form class="navbar-form navbar-right">
+                <form class="navbar-form navbar-right" method="post" action="/msg/query_pro/">
+                    {% csrf_token %}
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="请输入关键字">
+                        <input type="text" name="select_text" class="form-control" placeholder="请输入关键字">
+                        <select name="select_kind" class="form-control">
+                            <option>产品类别</option>
+                            <option>产品名称</option>
+                            <option>机构名称</option>
+                            <option>产品状态</option>
+                            <option>使用状态</option>
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary">查询</button>
                 </form>

@@ -390,3 +390,58 @@ def query_contract(request):
         return render(request, 'msg/contract.html', {
             'obj': obj
         })
+
+
+def query_pro(request):
+    if request.method == 'POST':
+        select_text = request.POST.get('select_text')
+        select_kind = request.POST.get('select_kind')
+        if select_kind == '产品类别':  # kind
+            obj = model2.Product.objects.filter(kind__contains=select_text)
+        elif select_kind == '产品名称':  # name
+            obj = model2.Product.objects.filter(name__contains=select_text)
+        elif select_kind == '机构名称':
+            obj = model2.Product.objects.filter(inst__name__contains=select_text)
+        elif select_kind == '产品状态':  # pstage
+            obj = model2.Product.objects.filter(pstage=select_text)
+        elif select_kind == '使用状态':  # pstatus
+            obj = model2.Product.objects.filter(pstatus__contains=select_text)
+        return render(request, 'msg/product.html', {
+            'obj': obj
+        })
+
+
+def query_chance(request):
+    if request.method == 'POST':
+        select_text = request.POST.get('select_text')
+        select_kind = request.POST.get('select_kind')
+        if select_kind == '机构名称':  # inst_name
+            obj = model2.Chance.objects.filter(inst__name__contains=select_text)
+        elif select_kind == '结构级别':  # inst_iclass
+            obj = model2.Chance.objects.filter(inst__iclass__contains=select_text)
+        elif select_kind == '阶段状态':  # stage
+            obj = model2.Chance.objects.filter(stage__contains=select_text)
+        elif select_kind == '跟进状态':  # fol
+            obj = model2.Chance.objects.filter(fol__contains=select_text)
+        elif select_kind == '审核状态':  # inst_istatus
+            obj = model2.Chance.objects.filter(inst__istatus__contains=select_text)
+        return render(request, 'msg/chance_msg.html', {
+            'obj': obj
+        })
+
+
+def query_inst(request):
+    if request.method == 'POST':
+        select_text = request.POST.get('select_text')
+        select_kind = request.POST.get('select_kind')
+        if select_kind == '机构名称':  # name
+            inst = model2.Inst.objects.filter(name__contains=select_text)
+        elif select_kind == '地址':  # address
+            inst = model2.Inst.objects.filter(address__contains=select_text)
+        elif select_kind == '结构级别':  # iclass
+            inst = model2.Inst.objects.filter(iclass__contains=select_text)
+        elif select_kind == '审核状态':  # istatus
+            inst = model2.Inst.objects.filter(istatus__contains=select_text)
+        return render(request, 'msg/inst_msg.html', {
+            'inst': inst
+        })

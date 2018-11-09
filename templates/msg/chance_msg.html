@@ -8,9 +8,17 @@
                 <ul class="nav navbar-nav">
                     <li><a href="/msg/new_chance/">新增商机</a></li>
                 </ul>
-                <form class="navbar-form navbar-right" action="#">
+                <form class="navbar-form navbar-right" method="post" action="/msg/query_chance/">
+                    {% csrf_token %}
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="请输入关键字">
+                        <input type="text" name="select_text" class="form-control" placeholder="请输入关键字">
+                        <select name="select_kind" class="form-control">
+                            <option>机构名称</option>
+                            <option>机构级别</option>
+                            <option>阶段状态</option>
+                            <option>跟进状态</option>
+                            <option>审核状态</option>
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary">查询</button>
                 </form>
@@ -28,7 +36,7 @@
                 <th>机构级别</th>
                 <th>阶段状态</th>
                 <th>跟进状态</th>
-{#                <th>经办人</th>#}
+                {#                <th>经办人</th>#}
                 <th>联系人</th>
                 <th>审核状态</th>
                 <th>操作</th>
@@ -38,7 +46,7 @@
             <tbody>
             {% for foo in obj %}
                 <tr>
-                    <td>{{ foo.id}}</td>
+                    <td>{{ foo.id }}</td>
                     <td>{{ foo.inst.name }}</td>
                     <td>{{ foo.inst.iclass }}</td>
                     <td>{{ foo.stage }}</td>

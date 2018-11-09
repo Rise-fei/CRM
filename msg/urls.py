@@ -25,6 +25,9 @@ urlpatterns = [
     url(r'^del_pro/(\d+)', views.del_pro),
     url(r'^info_pro/(\d+)', views.info_pro),
     url(r'^query_contract/', views.query_contract),
+    url(r'^query_pro/', views.query_pro),
+    url(r'^query_chance/', views.query_chance),
+    url(r'^query_inst/', views.query_inst),
 
     # url(r'^newcontact/', views.new_contact),
 
