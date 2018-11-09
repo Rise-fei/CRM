@@ -1,4 +1,4 @@
-{% extends 'journal_task/mod.html' %}
+{% extends 'index.html' %}
 
 {% block public %}
     <div class="journal_header col-sm-offset-5">
@@ -7,6 +7,7 @@
     <div class="new_btn">
         <div class="left_btn col-sm-4">
             <a href="/wang/newBespeak/"><button type="button" class="btn btn-primary new_add_btn">新增预约</button></a>
+            <button type="button" class="btn btn-primary new_add_btn" id="many_del">删除</button>
         </div>
         <div class="right_btn">
             <input type="text" placeholder="请输入关键字">
@@ -23,27 +24,29 @@
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
+                <th role="button" id="checkbox_on">选择</th>
                 <th>编号</th>
                 <th>机构名称</th>
                 <th>预约时间</th>
                 <th>操作人</th>
                 <th>预约状态</th>
-                <th>操作日期</th>
+                <th>预计结束日期</th>
                 <th>操作</th>
                 </thead>
                 <tbody>
                 {% for bespeak in bespeak_list %}
                     <tr>
+                        <td><input type="checkbox" value="{{ bespeak.number }}" id="onclick_checkbox" name="onclick_checkbox"></td>
                         <td>{{ bespeak.number }}</td>
-                        <td>{{ bespeak.organ.name }}</td>
+                        <td><a href="/wang/checkBespeak/id={{ bespeak.number }}/">{{ bespeak.organ.name }}</a></td>
                         <td>{{ bespeak.create_time }}</td>
                         <td>{{ bespeak.operator }}</td>
                         <td>{{ bespeak.state.res_state }}</td>
                         <td>{{ bespeak.data_time }}</td>
                         <td>
-                            <a href="/wang/editBespeak/id={{ bespeak.nid }}/">编辑</a>
-                            <a href="/wang/delBespeak/id={{ bespeak.nid }}/">删除</a>
-                            <a href="/wang/checkBespeak/id={{ bespeak.nid }}/">查看</a>
+                            <a href="/wang/editBespeak/id={{ bespeak.number }}/">编辑</a>
+                            <a href="/wang/delBespeak/id={{ bespeak.number }}/">删除</a>
+                            <a href="/wang/checkBespeak/id={{ bespeak.number }}/">查看</a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -51,6 +54,5 @@
             </table>
         </div>
     </div>
-    <script>
-    </script>
+    <script src="/static/static_wang/js/js2.js"></script>
 {% endblock %}

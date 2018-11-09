@@ -1,5 +1,4 @@
 .journal_header {
-    margin-top: 100px;
     margin-bottom: 40px;
 }
 
@@ -29,6 +28,3 @@
     padding-right: 5px;
 }
 
-.journal_list tr a:visited {
-    color: black;
-}

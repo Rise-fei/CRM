@@ -1,0 +1,96 @@
+{% extends 'index.html' %}
+
+{% block public %}
+    <div class="edit_header col-sm-offset-5">
+        <h2>编辑售后日志信息</h2>
+    </div>
+    <div class="class1">
+        <h4>售后日志基本信息</h4>
+    </div>
+    <form class="body_header form-horizontal" action="/wang/editAfterSale/id={{ check_after_list.number }}/"
+          method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <p class="col-sm-2 control-label">售后标题：</p>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="title" name="title" value="{{ check_after_list.title }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="col-sm-2 control-label">机构名称：</p>
+            <div class="col-sm-5" style="white-space:nowrap;">
+                <select type="text" class="form-control" id="organ_id" name="organ_id">
+                    {% for organ in organ_list %}
+                        {% if check_after_list.organ.name == organ.name %}
+                            <option value="{{ organ.number }}" selected>{{ organ.name }}</option>
+                        {% else %}
+                            <option value="{{ organ.number }}">{{ organ.name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="button" class="btn btn-primary col-sm-1">查询</button>
+        </div>
+        <div class="form-group">
+            <p class="col-sm-2 control-label">售后类型：</p>
+            <div class="col-sm-3">
+                <select type="text" class="form-control" id="sale_type_id" name="sale_type_id">
+                    {% for sale_type in sale_type_list %}
+                        {% if check_after_list.sale_type.sale_type == sale_type.sale_type %}
+                            <option value="{{ sale_type.nid }}" selected>{{ sale_type.sale_type }}</option>
+                        {% else %}
+                            <option value="{{ sale_type.nid }}">{{ sale_type.sale_type }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="col-sm-2 control-label">联系人：</p>
+            <div class="col-sm-3">
+                <select type="text" class="form-control" id="contact_name_id" name="contact_name_id">
+                    {% for contact in contact_list %}
+                        {% if check_after_list.organ.contact.contact_name == contact.contact_name %}
+                            <option value="{{ contact.number }}" selected>{{ contact.contact_name }}</option>
+                        {% else %}
+                            <option value="{{ contact.number }}">{{ contact.contact_name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="col-sm-2 control-label">发布时间：</p>
+            <div class="col-sm-3">
+                <input type="date" class="form-control" id="create_time" name="create_time"
+                       value="{{ check_after_list.create_time }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="col-sm-2 control-label">处理状态：</p>
+            <div class="col-sm-3">
+                <select type="text" class="form-control" id="state_id" name="state_id">
+                    {% for state in state_list %}
+                        {% if check_after_list.state.state == state.state %}
+                            <option value="{{ state.nid }}" selected>{{ state.state }}</option>
+                        {% else %}
+                            <option value="{{ state.nid }}">{{ state.state }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="col-sm-2 control-label">售后内容：</p>
+            <div class="col-sm-5">
+                <textarea class="form-control" id="content" name="content">{{ check_after_list.content }}</textarea>
+            </div>
+        </div>
+        <div class="btn_bottom col-sm-6 col-md-offset-4">
+            <button type="submit" class="btn btn-primary col-sm-2">确定</button>
+            <a href="/wang/afterSale/">
+                <button type="button" class="btn btn-primary col-sm-2">取消</button>
+            </a>
+        </div>
+    </form>
+{% endblock %}
