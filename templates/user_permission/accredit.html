@@ -22,10 +22,16 @@
                     <button type="button" class="btn btn-info" id="select">查询</button>
                 </div>
             </div>
+             <div class="form-group">
+                <label class="col-sm-2 control-label">用户角色：</label>
+                <div class="col-sm-10">
+                    <span id="role"></span>
+                </div>
+            </div>
             <div class="form-group">
-                        <label class="col-sm-2 control-label">选择角色</label>
+                        <label class="col-sm-2 control-label">重新选择角色</label>
                         <div class="col-sm-10">
-                        <select  name="select_role" multiple>
+                        <select   name="select_role" multiple>
                             {% for role in role_list %}
                                 <option value="{{ role.nid }}">
                                     角色名称：{{ role.role_name }}&nbsp;&nbsp;
@@ -96,7 +102,7 @@
                         if (data.status){//说明成功查询
                             $("#department").text(data.department_name);
                             $("#job").text(data.job_name);
-                            {#$("#role").text(data.role);#}
+                            $("#role").text(data.role);
                         }
                         else{
                             alert("请输入正确的用户名和员工姓名")

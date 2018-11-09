@@ -53,6 +53,7 @@ class ValidPermission(MiddlewareMixin):
                 result=re.match(permisson,current_path)
                 if result:
                     request.actions=item['actions']
+                    # print(item['actions'])
                     return None
 
         return HttpResponse('没有操作权限')

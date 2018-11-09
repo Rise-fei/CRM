@@ -129,15 +129,22 @@ def edit_user(request,id):
     return render(request,'user_permission/edit_user.html',{"user":user_obj,"action":action})
 
 def edit_employee(request,id):
+    print(id)
     employee=models.Employee.objects.get(id=id)
+    department_list=models.Department.objects.all()
+    job_list=models.Job.objects.all()
     action = Action(request.actions)
     if request.method=='POST':
         employee_name=request.POST.get("employee_name")
         phone=request.POST.get("phone")
+        department_id=request.POST.get("department")
+        job_id=request.POST.get("job")
         print(employee_name)
         print(phone)
         employee.employee_name=employee_name
         employee.phone=phone
+        employee.department_id=department_id
+        employee.job_id=job_id
         employee.save()
 
         return  redirect('/userpermission/employee_manage/')
@@ -167,6 +174,30 @@ def cat_employee(request,id):
     return render(request, 'user_permission/cat_employee.html', locals())
 
 
+def add_employee(request):
+    department_list = models.Department.objects.all()
+    job_list = models.Job.objects.all()
+    if request.method=='POST':
+        employee_name = request.POST.get("employee_name")
+        phone = request.POST.get("phone")
+        department_id = request.POST.get("department")
+        job_id = request.POST.get("job")
+        models.Employee.objects.create(employee_name=employee_name,phone=phone,department_id=department_id,job_id=job_id,status=0)
+        return redirect('/userpermission/employee_manage/')
+    return render(request,'user_permission/add_employee.html',locals())
+
+def role_accredit(request):
+    role_list=models.Role.objects.all()
+    permission_list=models.Permission.objects.all()
+    if request.method=='POST':
+        role_id=request.GET.get("role_id")
+        role_obj=models.Role.objects.get(nid=role_id)
+        permission_list=request.POST.getlist("select_role_accredit")
+        print(permission_list)
+        role_obj.permission.clear()
+        role_obj.permission.add(*permission_list)
+        return redirect('/userpermission/role_accredit/')
+    return render(request,'user_permission/role_accredit.html',locals())
 
 def logout(request):
     auth.logout(request)
@@ -175,7 +206,6 @@ def logout(request):
 @login_required
 def accredit(request):
     role_list=models.Role.objects.all()
-    action = Action(request.actions)
     if request.method=='POST':
         username=request.POST.get("username")
         employee_name=request.POST.get("employee_name")
@@ -185,24 +215,76 @@ def accredit(request):
 
             employee_id=user_obj.employee_id
             if employee_obj.id == employee_id:
+                user_obj.role.clear()  #清除之前对应的角色
 
                 role_id_list=request.POST.getlist('select_role')
                 # print(role_id_list)
                 role_obj_list=models.Role.objects.filter(nid__in=role_id_list)
-                user_obj.role.add(*role_obj_list)
+                user_obj.role.add(*role_obj_list)  #添加新的角色
 
-                return redirect('/index/')
+                return redirect('/home/')
             else:
                 return  HttpResponse("请输入匹配的用户名和员工名")
         except:
             return HttpResponse("请输入正确的用户名和员工名")
 
-    return render(request,'user_permission/accredit.html',{"role_list":role_list,"action":action})
+    return render(request,'user_permission/accredit.html',{"role_list":role_list,})
 
 def employee_manage(request):
     employee_list=models.Employee.objects.all()
 
     return render(request,"user_permission/employee_manage.html",locals())
+def essay_manage(request):
+    essay_list=models.Essay.objects.all()
+    return render(request,"user_permission/essay_manage.html",locals())
+
+def add_essay(request):
+    category_list=models.Essay_category.objects.all()
+    file_list=models.File.objects.all()
+    if request.method=='POST':
+        essay_name=request.POST.get('essay_name')
+        category_id=request.POST.get('category')
+        file_id=request.POST.get('file')
+        file_file=request.FILES.get('file_file')
+        author=request.POST.get('author')
+        comment=request.POST.get('comment')
+        models.Essay.objects.create(essay_title=essay_name,author=author,comment=comment,
+                                    category_id=category_id,file_id=file_id,
+                                    file_file=file_file)
+        return redirect('/userpermission/essay_manage/')
+    return  render(request,'user_permission/add_essay.html',locals())
+
+
+def edit_essay(request,essay_id):
+    print(essay_id)
+    essay_obj=models.Essay.objects.get(id=essay_id)
+    category_list = models.Essay_category.objects.all()
+    file_list = models.File.objects.all()
+    if request.method == 'POST':
+        essay_name = request.POST.get('essay_name')
+        category_id = request.POST.get('category')
+        file_id = request.POST.get('file')
+        file_file = request.FILES.get('file_file')
+        author = request.POST.get('author')
+        comment = request.POST.get('comment')
+        essay_obj.essay_title=essay_name
+        essay_obj.author=author
+        essay_obj.comment=comment
+        essay_obj.category_id=category_id
+        essay_obj.file_id=file_id
+        essay_obj.file_file=file_file
+        essay_obj.save()
+        return redirect('/userpermission/essay_manage/')
+    return render(request, 'user_permission/edit_essay.html', locals())
+def cat_essay(request,id):
+    essay_obj = models.Essay.objects.get(id=id)
+    return render(request, 'user_permission/cat_essay.html', locals())
+def delete_essay(request,id):
+    essay_obj = models.Essay.objects.get(id=id)
+    essay_obj.delete()
+    return redirect('/userpermission/essay_manage/')
+def select_essay(request):
+    pass
 
 @login_required
 def user_manage(request):
@@ -244,7 +326,8 @@ def select(request):
         ret={"status":False}
     return JsonResponse(ret)
 
-
+def home(request):
+    return render(request,'user_permission/home.html')
 def index(request):
     user=request.user.username
     return render(request,'index.html',{"user":user})
@@ -261,7 +344,7 @@ def login(request):
             user_obj = auth.authenticate(request, username=username, password=password)
             if user_obj:
                 auth.login(request,user_obj)
-                result['msg']='/index/'
+                result['msg']='/home/'
                 print(type(user_obj))
                 print(user_obj.nid)
                 request.session['user_id']=user_obj.nid
@@ -305,6 +388,6 @@ def register(request):
                 employee_obj.save()
             except:
                 return HttpResponse('注册失败')
-            return redirect('/login/')
+            return redirect('/home/')
         return HttpResponse("注册失败")
     return render(request,'user_permission/register.html',{"employee_list":employee_list,})
