@@ -8,7 +8,7 @@ class Contact(models.Model):
     联系人表
     """
     nid = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=32, verbose_name="姓名")
+    content_name = models.CharField(max_length=32, verbose_name="姓名")
     sex = models.CharField(max_length=32, verbose_name="性别")
     post = models.CharField(max_length=32, verbose_name="职务")
     phone = models.IntegerField(verbose_name="手机号")
@@ -36,7 +36,7 @@ class Journal(models.Model):
     """
     nid = models.AutoField(primary_key=True)
     number = models.IntegerField(verbose_name="编号")
-    Personal = models.CharField(max_length=32, verbose_name="日志所属人")
+    personal = models.CharField(max_length=32, verbose_name="日志所属人")
     create_time = models.DateTimeField(verbose_name='日志日期', auto_now_add=True)
     content = models.TextField(max_length=500, verbose_name="日志内容")
     organ = models.OneToOneField(to="Organ")

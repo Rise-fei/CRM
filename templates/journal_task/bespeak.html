@@ -2,11 +2,11 @@
 
 {% block public %}
     <div class="journal_header col-sm-offset-5">
-        <h2>日志信息列表</h2>
+        <h2>预约信息列表</h2>
     </div>
     <div class="new_btn">
         <div class="left_btn col-sm-4">
-            <a href="/wang/newJournal/"><button type="button" class="btn btn-primary new_add_btn">新增日志</button></a>
+            <a href="/wang/newBespeak/"><button type="button" class="btn btn-primary new_add_btn">新增预约</button></a>
         </div>
         <div class="right_btn">
             <input type="text" placeholder="请输入关键字">
@@ -25,27 +25,25 @@
                 <thead>
                 <th>编号</th>
                 <th>机构名称</th>
-                <th>机构类型</th>
-                <th>日志所属人</th>
-                <th>联系人</th>
-                <th>日志日期</th>
-                <th>日志等级</th>
+                <th>预约时间</th>
+                <th>操作人</th>
+                <th>预约状态</th>
+                <th>操作日期</th>
                 <th>操作</th>
                 </thead>
                 <tbody>
-                {% for journal in journal_list %}
+                {% for bespeak in bespeak_list %}
                     <tr>
-                        <td>{{ journal.number }}</td>
-                        <td>{{ journal.organ.name }}</td>
-                        <td>{{ journal.organ.organ_type }}</td>
-                        <td>{{ journal.personal }}</td>
-                        <td>{{ journal.organ.contact.content_name }}</td>
-                        <td>{{ journal.create_time }}</td>
-                        <td>{{ journal.jou_level }}</td>
+                        <td>{{ bespeak.number }}</td>
+                        <td>{{ bespeak.organ.name }}</td>
+                        <td>{{ bespeak.create_time }}</td>
+                        <td>{{ bespeak.operator }}</td>
+                        <td>{{ bespeak.state.res_state }}</td>
+                        <td>{{ bespeak.data_time }}</td>
                         <td>
-                            <a href="/wang/editJournal/id={{ journal.nid }}/">编辑</a>
-                            <a href="/wang/delJournal/id={{ journal.nid }}/">删除</a>
-                            <a href="/wang/checkJournal/id={{ journal.nid }}/">查看</a>
+                            <a href="/wang/editBespeak/id={{ bespeak.nid }}/">编辑</a>
+                            <a href="/wang/delBespeak/id={{ bespeak.nid }}/">删除</a>
+                            <a href="/wang/checkBespeak/id={{ bespeak.nid }}/">查看</a>
                         </td>
                     </tr>
                 {% endfor %}
