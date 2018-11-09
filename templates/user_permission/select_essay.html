@@ -1,0 +1,107 @@
+{% extends "index.html" %}
+{% block public %}  <!-- 扩展base中的block content部分 -->
+
+    <div class="container">
+        <h1 class="text-center">搜索资料库</h1>
+        <div class="col-lg-offset-6">
+        <form >
+            资料标题相关信息<input id="content" name="content">
+            <select id="category" name="category">
+                 {% for category in category_list %}
+                    <option value="{{ category.pk }}">{{ category.category }}</option>
+                 {% endfor %}
+            </select>
+             <select id="file" name="file">
+                 {% for file in file_list %}
+                     <option value="{{ file.pk }}">{{ file.type }}</option>
+                 {% endfor %}
+            </select>
+        <a class="btn btn-primary" id="select">搜索</a>
+
+
+
+        </form>
+        </div>
+        <table class="table table-striped">
+            <thead>
+            <th>编号</th>
+            <th>资料名称</th>
+            <th>资料分类</th>
+            <th>文档分类</th>
+            <th>作者</th>
+            <th>操作</th>
+            </thead>
+            <tbody id="tb">
+             {% for essay in essay_list%}
+                    <tr>
+                        <td>{{ essay.id }}</td>
+                        <td>{{ essay.essay_title}}</td>
+                        <td>{{ essay.category.category }}</td>
+                        <td>{{ essay.file.type }}</td>
+                        <td>{{ essay.author }}</td>
+                        <td>
+                            <a href="/userpermission/edit_essay/{{ essay.id }}/">
+                                <button class="btn btn-info">编辑</button>
+                            </a>
+                            <a href="/userpermission/delete_essay/{{ essay.id }}/">
+                                <button class="btn btn-primary">删除</button>
+                            </a>
+                            <a href="/userpermission/cat_essay/{{ essay.id }}/">
+                                <button class="btn btn-danger">查看</button>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+<script>
+        $("#select").click(function () {
+        var category_id = $("#category").val();
+        var file_id = $("#file").val();
+        var content = $("#content").val();
+        {#alert(category_id);#}
+        {#alert(file_id);#}
+        {#alert(content);#}
+        // 2. 用AJAX发送到服务端
+         $.ajax({
+            url: "/userpermission/select_essay/",
+            type: "post",
+            data: {
+                "category": category_id,
+                "content": content,
+                "file": file_id,
+                "csrfmiddlewaretoken": $("[name='csrfmiddlewaretoken']").val()
+            },
+            success: function (data) {
+                data=JSON.parse(data);
+                $('#tb').empty();
+                {#console.log(data);#}
+                {#console.log(typeof data);#}
+                $.each(data,function (index,n) {
+                    console.log(n);
+                    $("tbody").append(" <tr>\n" +
+                        "                        <td>"+n.id+"</td>\n" +
+                        "                        <td>"+n.essay_title+"</td>\n" +
+                        "                        <td>"+n.category__category+"</td>\n" +
+                        "                        <td>"+n.file__type+"</td>\n" +
+                        "                        <td>"+n.author+"</td>\n" +
+                        "                        <td>\n" +
+                        "                            <a href=\"/userpermission/edit_essay/"+n.id+"/\">\n" +
+                        "                                <button class=\"btn btn-info\">编辑</button>\n" +
+                        "                            </a>\n" +
+                        "                            <a href=\"/userpermission/delete_essay/"+n.id+"/\">\n" +
+                        "                                <button class=\"btn btn-primary\">删除</button>\n" +
+                        "                            </a>\n" +
+                        "                            <a href=\"/userpermission/cat_essay/"+n.id+"/\">\n" +
+                        "                                <button class=\"btn btn-danger\">查看</button>\n" +
+                        "                            </a>\n" +
+                        "                        </td>\n" +
+                        "                    </tr>")
+                });
+            }
+        })
+    });
+</script>
+
+{% endblock %}

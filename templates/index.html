@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>客户资源管理</title>
     <link href="/static/static_fei/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-{#    <link href="/static/static_fei/css/cssStyle.css" rel="stylesheet">#}
+    <link href="/static/static_fei/css/cssStyle.css" rel="stylesheet">
 {#    <link href="/static/static_fei/css/mod.css" rel="stylesheet">#}
     <script src="/static/static_fei/bootstrap/jquery-3.3.1.min.js"></script>
     <script src="/static/static_fei/bootstrap/js/bootstrap.min.js"></script>
@@ -63,8 +63,9 @@
             <ul class="list-group">
                 <li class="list-group-item font_big"><a href="#"><p class="glyphicon glyphicon-home">&nbsp;首页</p></a>
                 </li>
-                <li class="list-group-item font_big"><a href="#"><p class="glyphicon glyphicon-grain">&nbsp;机构管理</p></a>
+                <li class="list-group-item font_big"><a href="#" id="nie"><p class="glyphicon glyphicon-grain">&nbsp;机构管理</p></a>
                 </li>
+                <div class="nie_nie" style="display: none">
                 <li class="list-group-item"><a href="#"><p class="glyphicon glyphicon-menu-right"> &nbsp;信息管理</p></a>
                 </li>
                 <li class="list-group-item"><a href="#"><p class="glyphicon glyphicon-menu-right"> &nbsp;商机管理</p></a>
@@ -81,6 +82,7 @@
                 </li>
                 <li class="list-group-item"><a href="#"><p class="glyphicon glyphicon-menu-right"> &nbsp;任务清单</p></a>
                 </li>
+                </div>
                 <li class="list-group-item font_big">
                     <a href="/userpermission/employee_manage/">
                         <p class="glyphicon glyphicon-user">&nbsp;员工管理</p>
@@ -102,4 +104,9 @@
 </div>
 
 </body>
+<script>
+    $("#nie").click(function () {
+        $(".nie_nie").slideToggle(300)
+    })
+</script>
 </html>

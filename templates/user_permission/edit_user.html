@@ -24,6 +24,7 @@
                          <div class="form-group">
                             <label class="col-sm-2 control-label">员工姓名</label>
                             <div class="col-sm-10">
+                                <input type="text" name="old_em_name" value="{{ user.employee.employee_name }}" style="display: none">
                                 <input type="text" value="{{ user.employee.employee_name }}" id="employee_name" name="employee_name">
                                 <button type="button" class="btn btn-default btn-sm" id="select">查询</button>
                             </div>

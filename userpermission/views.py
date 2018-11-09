@@ -4,6 +4,9 @@ from userpermission import  models
 from django.http import  JsonResponse
 from django.db.models import Count
 from django.contrib.auth.decorators import login_required
+from django.db.models import  Q
+import json
+from django.core import serializers
 class Action(object):
 
     def __init__(self,actions):
@@ -118,13 +121,20 @@ def edit_user(request,id):
         user_obj.username=request.POST.get('username')
         user_obj.set_password(request.POST.get('password'))
         employee_name=request.POST.get('employee_name')
+        employee_old_name=request.POST.get('old_em_name')
         try:
-             em_id=models.Employee.objects.get(employee_name=employee_name).id
+             em_obj=models.Employee.objects.get(employee_name=employee_name)
+             old_em=models.Employee.objects.get(employee_name=employee_old_name)
+             old_em.status=0   #用户更改员工后，原先对应的员工状态恢复为0，以备其他用户使用
+             em_obj.status=1    #用户对应新员工状态为1
+             em_id=em_obj.id
              user_obj.employee_id = em_id
              user_obj.save()
+             old_em.save()
+             em_obj.save()
         except:
             return HttpResponse('员工不存在，请查询后修改')
-        return  redirect('/index/')
+        return  redirect('/userpermission/user_manage/')
 
     return render(request,'user_permission/edit_user.html',{"user":user_obj,"action":action})
 
@@ -222,7 +232,7 @@ def accredit(request):
                 role_obj_list=models.Role.objects.filter(nid__in=role_id_list)
                 user_obj.role.add(*role_obj_list)  #添加新的角色
 
-                return redirect('/home/')
+                return redirect('/userpermission/user_manage/')
             else:
                 return  HttpResponse("请输入匹配的用户名和员工名")
         except:
@@ -283,8 +293,27 @@ def delete_essay(request,id):
     essay_obj = models.Essay.objects.get(id=id)
     essay_obj.delete()
     return redirect('/userpermission/essay_manage/')
+
 def select_essay(request):
-    pass
+    essay_list=models.Essay.objects.all()
+    category_list = models.Essay_category.objects.all()
+    file_list = models.File.objects.all()
+    if request.method=='POST':
+        content = request.POST.get('content')
+        category_id = request.POST.get('category')
+        category_id=int(category_id)
+        print(type(category_id))
+        file_id = request.POST.get('file')
+        file_id=int(file_id)
+        select_essay_list=models.Essay.objects.filter(Q(essay_title__icontains=content) |  Q(category_id=category_id) | Q(file_id=file_id)).\
+            values("id","essay_title","category__category","file__type","author")
+        print(select_essay_list)
+        # ret=serializers.serialize('json',select_essay_list)
+        ret=json.dumps(list(select_essay_list))
+        print(ret)
+        return JsonResponse(ret,safe=False)
+
+    return render(request,'user_permission/select_essay.html',locals())
 
 @login_required
 def user_manage(request):
